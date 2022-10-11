@@ -10,6 +10,14 @@ suavizados::suavizados(int num_foto, int num_tipo, QWidget *parent) :
     ui->setupUi(this);
     nfoto= num_foto;
     tipo= num_tipo;
+
+    if(tipo == 3){
+        ui->spinBox->setMaximum(150);
+        ui->horizontalSlider->setMaximum(150);
+        ui->spinBox_2->setEnabled(false);
+        ui->horizontalSlider_2->setEnabled(false);
+    }
+
     set_callback_foto(nfoto, false);
     if (parent)
         move(parent->x()+DESP_X_HIJO, parent->y()+DESP_Y_HIJO);

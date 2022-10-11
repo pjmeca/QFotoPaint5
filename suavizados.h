@@ -19,7 +19,7 @@ protected:
 private:
     Ui::suavizados *ui;
     int nfoto;
-    int tipo;            // Tipo de suavizado que se aplica: 1=GAUSIANO, 2=MEDIA
+    int tipo;            // Tipo de suavizado que se aplica: 1=GAUSIANO, 2=MEDIA, 3=MEDIANA
     void actualizar();
 
 private slots:

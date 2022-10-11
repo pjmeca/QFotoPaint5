@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------------
+﻿//---------------------------------------------------------------------------
 
 #include "imagenes.h"
 #include "mainwindow.h"
@@ -258,14 +258,38 @@ void cb_punto (int factual, int x, int y)
     if (difum_pincel==0)
         circle(im, Point(x, y), radio_pincel, color_pincel, -1, LINE_AA);
     else {
-        Mat res(im.size(), im.type(), color_pincel);
-        Mat cop(im.size(), im.type(), CV_RGB(0,0,0));
-        circle(cop, Point(x, y), radio_pincel, CV_RGB(255,255,255), -1, LINE_AA);
+
+        int t = radio_pincel+difum_pincel;
+        int posx = t, posy=t;
+        Rect roi(x-t, y-t, 2*t+1, 2*t+1);
+
+        // Si el ROI se sale de la imagen
+        if (roi.x < 0){
+            roi.width += roi.x;
+            posx += roi.x;
+            roi.x = 0;
+        }
+        if (roi.y < 0){
+            roi.height += roi.y;
+            posy += roi.y;
+            roi.y = 0;
+        }
+        if (roi.x+roi.width > im.cols){
+            roi.width = im.cols-roi.x;
+        }
+        if (roi.y+roi.height > im.rows){
+            roi.height = im.rows-roi.y;
+        }
+
+        Mat frag = im(roi);
+        Mat res(frag.size(), im.type(), color_pincel);
+        Mat cop(frag.size(), im.type(), CV_RGB(0,0,0));
+        circle(cop, Point(posx, posy), radio_pincel, CV_RGB(255,255,255), -1, LINE_AA);
         blur(cop, cop, Size(difum_pincel*2+1, difum_pincel*2+1));
         multiply(res, cop, res, 1.0/255.0);
         bitwise_not(cop, cop);
-        multiply(im, cop, im, 1.0/255.0);
-        im= res + im;
+        multiply(frag, cop, frag, 1.0/255.0);
+        frag = res + frag;
     }
     imshow(foto[factual].nombre, im);
     foto[factual].modificada= true;
@@ -328,6 +352,36 @@ void cb_ver_rectangulo(int factual, int x, int y)
 {
     Mat res= foto[factual].img.clone();
     rectangle(res, Point(downx, downy), Point(x,y), color_pincel, radio_pincel*2-1); // negativo para que rellene el rectangulo si el radio del pincel es 0 (si rectangle recibe un número negativo, lo rellena)
+    imshow(foto[factual].nombre, res);
+}
+
+//---------------------------------------------------------------------------
+
+void cb_elipse (int factual, int x, int y)
+{
+    Mat im= foto[factual].img;
+    if (difum_pincel==0)
+        ellipse(im, Point(downx, downy), Size(abs(x-downx), abs(y-downy)), 0, 0, 360, color_pincel, radio_pincel*2-1);
+    else {
+        Mat res(im.size(), im.type(), color_pincel);
+        Mat cop(im.size(), im.type(), CV_RGB(0,0,0));
+        ellipse(cop, Point(downx, downy), Size(abs(x-downx), abs(y-downy)), 0, 0, 360, CV_RGB(255,255,255), radio_pincel*2-1);
+        blur(cop, cop, Size(difum_pincel*2+1, difum_pincel*2+1));
+        multiply(res, cop, res, 1.0/255.0);
+        bitwise_not(cop, cop);
+        multiply(im, cop, im, 1.0/255.0);
+        im= res + im;
+    }
+    imshow(foto[factual].nombre, im);
+    foto[factual].modificada= true;
+}
+
+//---------------------------------------------------------------------------
+
+void cb_ver_elipse (int factual, int x, int y)
+{
+    Mat res= foto[factual].img.clone();
+    ellipse(res, Point(downx, downy), Size(abs(x-downx), abs(y-downy)), 0, 0, 360, color_pincel, radio_pincel*2-1); // negativo para que rellene el rectangulo si el radio del pincel es 0 (si rectangle recibe un número negativo, lo rellena)
     imshow(foto[factual].nombre, res);
 }
 
@@ -425,7 +479,18 @@ void callback (int event, int x, int y, int flags, void *_nfoto)
             ninguna_accion(factual, x, y);
         break;
 
-        // 2.4. Herramienta SELECCION
+
+        // 2.4. Herramienta ELIPSE
+    case HER_ELIPSE:
+        if (event==EVENT_LBUTTONUP)
+            cb_elipse(factual, x, y);
+        else if (event==EVENT_MOUSEMOVE && flags==EVENT_FLAG_LBUTTON)
+            cb_ver_elipse(factual, x, y);
+        else
+            ninguna_accion(factual, x, y);
+        break;
+
+        // 2.5. Herramienta SELECCION
     case HER_SELECCION:
         if (event==EVENT_LBUTTONUP)
             cb_seleccionar(factual, x, y);
@@ -497,11 +562,15 @@ void rotar_exacto (int nfoto, int nres, int grado)
 
 //---------------------------------------------------------------------------
 
-void ver_brillo_contraste (int nfoto, double suma, double prod, bool guardar)
+void ver_brillo_contraste (int nfoto, double suma, double prod, double gamma, bool guardar)
 {
     assert(nfoto>=0 && nfoto<MAX_VENTANAS && foto[nfoto].usada);
     Mat img;
     foto[nfoto].img.convertTo(img, CV_8UC3, prod, suma);
+    Mat img32f;
+    img.convertTo(img32f, CV_32F, 1.0/255);
+    pow(img32f, gamma, img32f);
+    img32f.convertTo(img, CV_8U, 255);
     imshow(foto[nfoto].nombre, img);
     if (guardar) {
         img.copyTo(foto[nfoto].img);
@@ -516,10 +585,14 @@ void ver_suavizado (int nfoto, int ntipo, int tamx, int tamy, bool guardar)
     assert(nfoto>=0 && nfoto<MAX_VENTANAS && foto[nfoto].usada);
     assert(tamx>0 && tamx&1 && tamy>0 && tamy&1);
     Mat img= foto[nfoto].img.clone();
+    Mat fragmento = img(foto[nfoto].roi); // para que se apliquen los suavizados sobre el ROI
+
     if (ntipo == 1)
-        GaussianBlur(foto[nfoto].img, img, Size(tamx, tamy), 0);
+        GaussianBlur(fragmento, fragmento, Size(tamx, tamy), 0);
     else if (ntipo == 2)
-        blur(foto[nfoto].img, img, Size(tamx, tamy));
+        blur(fragmento, fragmento, Size(tamx, tamy));
+    else if (ntipo == 3)
+        medianBlur(fragmento, fragmento, tamx);
     imshow(foto[nfoto].nombre, img);
     if (guardar) {
         img.copyTo(foto[nfoto].img);

@@ -288,6 +288,14 @@ void MainWindow::on_actionMedia_ponderada_triggered()
     }
 }
 
+void MainWindow::on_actionMediana_triggered()
+{
+    if (foto_activa() !=- 1) {
+        suavizados s(foto_activa(), 3, this);
+        s.exec();
+    }
+}
+
 void MainWindow::on_actionRotar_imagen_triggered()
 {
     if (foto_activa() != -1) {
@@ -317,4 +325,15 @@ void MainWindow::on_actionRect_ngulo_triggered()
 {
     herr_actual = HER_RECTANGULO;
     ui->toolButton_7->setChecked(true);
+}
+
+void MainWindow::on_actionElipse_triggered()
+{
+    ui->toolButton_7->setChecked(true);
+    herr_actual = HER_ELIPSE;
+}
+
+void MainWindow::on_toolButton_8_clicked()
+{
+    herr_actual = HER_ELIPSE;
 }
