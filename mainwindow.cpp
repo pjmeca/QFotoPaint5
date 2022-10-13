@@ -11,6 +11,7 @@ using namespace cv;
 #include "brillocontraste.h"
 #include "dialognueva.h"
 #include "imagenes.h"
+#include "video.h"
 #include "mediadevideo.h"
 #include "mediaponderada.h"
 #include "rotaravideo.h"
@@ -336,4 +337,54 @@ void MainWindow::on_actionElipse_triggered()
 void MainWindow::on_toolButton_8_clicked()
 {
     herr_actual = HER_ELIPSE;
+}
+
+void MainWindow::on_actioncopiar_a_nueva_triggered()
+{
+    if (foto_activa() != -1 && primera_libre() != -1) {
+        int fa = foto_activa();
+        Mat nueva = foto[fa].img(foto[fa].roi).clone();
+        crear_nueva(primera_libre(), nueva);
+    }
+}
+
+void MainWindow::on_actionCapturar_de_c_mara_triggered()
+{
+    if (primera_libre() != -1)
+        capturar_camara(primera_libre());
+}
+
+void MainWindow::on_toolButton_9_clicked()
+{
+    herr_actual = HER_ARCOIRIS;
+}
+
+void MainWindow::on_actionArco_ris_triggered()
+{
+    herr_actual = HER_ARCOIRIS;
+    ui->toolButton_9->setChecked(true);
+}
+
+void MainWindow::on_actionGrises_triggered()
+{
+    if (foto_activa() != -1 && primera_libre() != -1)
+        ver_histograma(foto_activa(), primera_libre(),3);
+}
+
+void MainWindow::on_actionRojo_triggered()
+{
+    if (foto_activa() != -1 && primera_libre() != -1)
+        ver_histograma(foto_activa(), primera_libre(),2);
+}
+
+void MainWindow::on_actionVerde_triggered()
+{
+    if (foto_activa() != -1 && primera_libre() != -1)
+        ver_histograma(foto_activa(), primera_libre(),1);
+}
+
+void MainWindow::on_actionAzul_triggered()
+{
+    if (foto_activa() != -1 && primera_libre() != -1)
+        ver_histograma(foto_activa(), primera_libre(),0);
 }

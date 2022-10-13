@@ -387,6 +387,87 @@ void cb_ver_elipse (int factual, int x, int y)
 
 //---------------------------------------------------------------------------
 
+Scalar ColorArcoiris()
+{
+       static Scalar colorActual = CV_RGB(255,0,0);
+       static int estado = 0;
+       int incremento = 8;
+
+       switch(estado) {
+       case 0 :
+           colorActual.val[1] += incremento;
+           if(colorActual.val[1] >= 255) estado = 1;
+           break;
+       case 1 :
+           colorActual.val[2] -= incremento;
+           if (colorActual.val[2] <= 0) estado = 2;
+           break;
+       case 2 :
+           colorActual.val[0] += incremento;
+           if (colorActual.val[0] >= 255) estado = 3;
+           break;
+       case 3 :
+           colorActual.val[1] -= incremento;
+           if (colorActual.val[1] <= 0) estado = 4;
+           break;
+       case 4 :
+           colorActual.val[2] += incremento;
+           if (colorActual.val[2] >= 255) estado = 5;
+           break;
+       case 5 :
+           colorActual.val[0] -= incremento;
+           if (colorActual.val[0] <= 0) estado = 0;
+           break;
+       }
+
+       return colorActual;
+}
+
+void cb_arcoiris (int factual, int x, int y)
+{
+    Mat im= foto[factual].img;  // Ojo: esto no es una copia, sino a la misma imagen
+    if (difum_pincel==0)
+        circle(im, Point(x, y), radio_pincel, ColorArcoiris(), -1, LINE_AA);
+    else {
+
+        int t = radio_pincel+difum_pincel;
+        int posx = t, posy=t;
+        Rect roi(x-t, y-t, 2*t+1, 2*t+1);
+
+        // Si el ROI se sale de la imagen
+        if (roi.x < 0){
+            roi.width += roi.x;
+            posx += roi.x;
+            roi.x = 0;
+        }
+        if (roi.y < 0){
+            roi.height += roi.y;
+            posy += roi.y;
+            roi.y = 0;
+        }
+        if (roi.x+roi.width > im.cols){
+            roi.width = im.cols-roi.x;
+        }
+        if (roi.y+roi.height > im.rows){
+            roi.height = im.rows-roi.y;
+        }
+
+        Mat frag = im(roi);
+        Mat res(frag.size(), im.type(), ColorArcoiris());
+        Mat cop(frag.size(), im.type(), CV_RGB(0,0,0));
+        circle(cop, Point(posx, posy), radio_pincel, CV_RGB(255,255,255), -1, LINE_AA);
+        blur(cop, cop, Size(difum_pincel*2+1, difum_pincel*2+1));
+        multiply(res, cop, res, 1.0/255.0);
+        bitwise_not(cop, cop);
+        multiply(frag, cop, frag, 1.0/255.0);
+        frag = res + frag;
+    }
+    imshow(foto[factual].nombre, im);
+    foto[factual].modificada= true;
+}
+
+//---------------------------------------------------------------------------
+
 void cb_seleccionar (int factual, int x, int y)
 {
     Mat im= foto[factual].img;
@@ -486,6 +567,14 @@ void callback (int event, int x, int y, int flags, void *_nfoto)
             cb_elipse(factual, x, y);
         else if (event==EVENT_MOUSEMOVE && flags==EVENT_FLAG_LBUTTON)
             cb_ver_elipse(factual, x, y);
+        else
+            ninguna_accion(factual, x, y);
+        break;
+
+    // 2.1. Herramienta PUNTO
+    case HER_ARCOIRIS:
+        if (flags==EVENT_FLAG_LBUTTON)
+            cb_arcoiris(factual, x, y);
         else
             ninguna_accion(factual, x, y);
         break;
@@ -620,6 +709,35 @@ string Lt1(string cadena)
 {
     QString temp= QString::fromUtf8(cadena.c_str());
     return temp.toLatin1().data();
+}
+
+//---------------------------------------------------------------------------
+
+void ver_histograma(int nfoto, int nres, int canal)
+{
+    QImage imq= QImage(":/imagenes/histbase.png");
+    Mat imghist(imq.height(),imq.width(),CV_8UC4,imq.scanLine(0));
+    cvtColor(imghist, imghist, COLOR_RGBA2RGB); // quitamos el canal alfa
+
+    Mat gris;
+    Mat hist;
+    cvtColor(foto[nfoto].img, gris, COLOR_BGR2GRAY);
+    int canales[1] = {0};
+    int bins[1] = {256};
+    float rango[2] = {0, 256};
+    const float *rangos[]= {rango};
+    if(canal == 3)
+        calcHist(&gris, 1, canales, noArray(), hist, 1, bins, rangos);
+    else
+        calcHist(&(foto[nfoto].img), 1, &canal, noArray(), hist, 1, bins, rangos);
+    double vmin, vmax;
+    minMaxLoc(hist, &vmin, &vmax);
+    for (int i= 0; i<256; i++){
+         float valor = hist.at<float>(i);
+         rectangle(imghist, Point(3+i*391/256,185), Point(3+(i+1)+391/256, 185-valor*182/vmax), CV_RGB(canal==2?255:0, canal==1?255:0, canal==0?255:0), -1);
+    }
+
+    crear_nueva(nres, imghist);
 }
 
 //---------------------------------------------------------------------------

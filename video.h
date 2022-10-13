@@ -32,4 +32,7 @@ void media_a_nueva (int nfoto);
 void mostrar_camara (void);
 // Captura una imagen de la cámara y la muestra en la ventana correspondiente
 
+void capturar_camara(int nres);
+// Captura de cámara y almacena en la posición nres
+
 #endif // VIDEO_H

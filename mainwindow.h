@@ -62,6 +62,14 @@ private slots:
     void on_actionElipse_triggered();
     void on_toolButton_8_clicked();
     void on_actionMediana_triggered();
+    void on_actioncopiar_a_nueva_triggered();
+    void on_actionCapturar_de_c_mara_triggered();
+    void on_toolButton_9_clicked();
+    void on_actionArco_ris_triggered();
+    void on_actionGrises_triggered();
+    void on_actionRojo_triggered();
+    void on_actionVerde_triggered();
+    void on_actionAzul_triggered();
 };
 
 extern MainWindow *w;
