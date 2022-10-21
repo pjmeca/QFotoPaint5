@@ -70,6 +70,7 @@ private slots:
     void on_actionRojo_triggered();
     void on_actionVerde_triggered();
     void on_actionAzul_triggered();
+    void on_actionBajorrelieve_triggered();
 };
 
 extern MainWindow *w;

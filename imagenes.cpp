@@ -669,6 +669,40 @@ void ver_brillo_contraste (int nfoto, double suma, double prod, double gamma, bo
 
 //---------------------------------------------------------------------------
 
+void ver_bajorrelieve (int nfoto, double angulo, double grado, int nfondo, bool guardar)
+{
+    QString nombres[4]={":/imagenes/arena.jpg",
+                       ":/imagenes/cielo.jpg",
+                       ":/imagenes/gris.png",
+                       ":/imagenes/madera.jpg"};
+    QImage imq= QImage(nombres[nfondo]);
+    Mat imgfondo(imq.height(),imq.width(),CV_8UC4,imq.scanLine(0));
+    cvtColor(imgfondo, imgfondo, COLOR_RGBA2RGB);
+    resize(imgfondo, imgfondo, foto[nfoto].img.size());
+
+    Mat gris;
+    cvtColor(foto[nfoto].img, gris, COLOR_BGR2GRAY);
+    Mat rotada;
+    rotar_angulo(gris, rotada, angulo, 1.0, 1);
+    Mat sobel;
+    Sobel(rotada, sobel, CV_8U, 1, 0, 3, grado, 128, BORDER_REFLECT);
+    rotar_angulo(sobel, rotada, -angulo, 1.0, 0);
+    Mat res;
+    res= rotada(Rect((rotada.cols-gris.cols)/2,
+                     (rotada.rows-gris.rows)/2,
+                     gris.cols, gris.rows));
+    cvtColor(res, res, COLOR_GRAY2BGR); // lo devolvemos a 3 canales
+
+    addWeighted(res, 1.0, imgfondo, 1.0, -128, res); // le sumamos el fondo
+
+    if(guardar)
+        crear_nueva(primera_libre(), res);
+    else
+        imshow("Bajorelieve", res);
+}
+
+//---------------------------------------------------------------------------
+
 void ver_suavizado (int nfoto, int ntipo, int tamx, int tamy, bool guardar)
 {
     assert(nfoto>=0 && nfoto<MAX_VENTANAS && foto[nfoto].usada);

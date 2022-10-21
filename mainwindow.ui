@@ -245,7 +245,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QToolButton" name="toolButton_5">
     <property name="geometry">
      <rect>
-      <x>170</x>
+      <x>210</x>
       <y>0</y>
       <width>41</width>
       <height>41</height>
@@ -319,7 +319,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QToolButton" name="toolButton_7">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>250</x>
       <y>0</y>
       <width>41</width>
       <height>41</height>
@@ -348,7 +348,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QToolButton" name="toolButton_8">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>290</x>
       <y>0</y>
       <width>41</width>
       <height>41</height>
@@ -371,7 +371,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QToolButton" name="toolButton_9">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>170</x>
       <y>0</y>
       <width>41</width>
       <height>41</height>
@@ -482,6 +482,7 @@ p, li { white-space: pre-wrap; }
      <addaction name="actionMediana"/>
     </widget>
     <addaction name="menuSuavizado"/>
+    <addaction name="actionBajorrelieve"/>
    </widget>
    <widget class="QMenu" name="menuV_deo">
     <property name="title">
@@ -692,6 +693,11 @@ p, li { white-space: pre-wrap; }
   <action name="actionAzul">
    <property name="text">
     <string>Azul</string>
+   </property>
+  </action>
+  <action name="actionBajorrelieve">
+   <property name="text">
+    <string>Bajorrelieve...</string>
    </property>
   </action>
  </widget>

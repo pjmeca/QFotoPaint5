@@ -144,6 +144,10 @@ void ver_brillo_contraste (int nfoto, double suma, double prod, double gamma,
 // A(x,y)*prod + suma. Si guardar==true se guarda la imagen, y en otro caso
 // solo se visualiza el resultado, pero sin guardar
 
+void ver_bajorrelieve (int nfoto, double angulo, double grado,
+                       int nfondo, bool guardar=false);
+// Efecto de bajorrelieve
+
 void ver_suavizado (int nfoto, int ntipo, int tamx, int tamy,
                     bool guardar= false);
 // Modifica la imagen en nfoto, aplicando un suavizado de tamaño dado. ntipo
