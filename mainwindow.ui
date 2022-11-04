@@ -468,6 +468,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionInvertir"/>
     <addaction name="menuRotar"/>
     <addaction name="actionMedia_ponderada"/>
+    <addaction name="actionEscala_de_color"/>
    </widget>
    <widget class="QMenu" name="menuEfectos">
     <property name="title">
@@ -483,6 +484,7 @@ p, li { white-space: pre-wrap; }
     </widget>
     <addaction name="menuSuavizado"/>
     <addaction name="actionBajorrelieve"/>
+    <addaction name="actionPinchar_Estirar"/>
    </widget>
    <widget class="QMenu" name="menuV_deo">
     <property name="title">
@@ -698,6 +700,16 @@ p, li { white-space: pre-wrap; }
   <action name="actionBajorrelieve">
    <property name="text">
     <string>Bajorrelieve...</string>
+   </property>
+  </action>
+  <action name="actionEscala_de_color">
+   <property name="text">
+    <string>Escala de color</string>
+   </property>
+  </action>
+  <action name="actionPinchar_Estirar">
+   <property name="text">
+    <string>Pinchar/Estirar...</string>
    </property>
   </action>
  </widget>

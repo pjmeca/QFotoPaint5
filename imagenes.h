@@ -148,6 +148,14 @@ void ver_bajorrelieve (int nfoto, double angulo, double grado,
                        int nfondo, bool guardar=false);
 // Efecto de bajorrelieve
 
+void escala_color(int nfoto, int nres);
+// Transformación de escala de color con el color_pincel
+
+void ver_pinchar_estirar(int nfoto, int cx, int cy,
+                         double radio, double grado,
+                         bool guardar=false);
+// Transformacion d epinchar/estirar
+
 void ver_suavizado (int nfoto, int ntipo, int tamx, int tamy,
                     bool guardar= false);
 // Modifica la imagen en nfoto, aplicando un suavizado de tamaño dado. ntipo

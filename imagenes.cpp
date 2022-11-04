@@ -703,6 +703,61 @@ void ver_bajorrelieve (int nfoto, double angulo, double grado, int nfondo, bool 
 
 //---------------------------------------------------------------------------
 
+void escala_color(int nfoto, int nres)
+{
+    Mat grises;
+    cvtColor(foto[nfoto].img, grises, COLOR_BGR2GRAY);
+    cvtColor(grises, grises, COLOR_GRAY2BGR);
+    Mat lut(1, 256, CV_8UC3);
+    int vr = color_pincel.val[2];
+    int vg = color_pincel.val[1];
+    int vb = color_pincel.val[0];
+    for (int A=0; A<256; A++)
+        if(A<128)
+            lut.at<Vec3b>(A) = Vec3b(vb*A/128, vg*A/128, vr*A/128);
+        else
+            lut.at<Vec3b>(A) = Vec3b(vb+(255-vb)*(A-128)/128,
+                                     vg+(255-vg)*(A-128)/128,
+                                     vr+(255-vr)*(A-128)/128);
+    Mat imgres;
+    LUT(grises, lut, imgres);
+    crear_nueva(nres, imgres);
+}
+
+//---------------------------------------------------------------------------
+
+void ver_pinchar_estirar(int nfoto, int cx, int cy,
+                         double radio, double grado,
+                         bool guardar)
+{
+    Mat S(foto[nfoto].img.rows, foto[nfoto].img.cols, CV_32FC1);
+    for(int y=0; y<S.rows; y++)
+        for(int x=0; x<S.cols; x++)
+            S.at<float>(y,x)=exp(-((x-cx)*(x-cx)+(y-cy)*(y-cy))/(radio*radio));
+            //S.at<float>(y,x)=sin(0.01*sqrt((x-cx)*(x-cx)+(y-cy)*(y-cy)) + radio/100.0); // para el efecto de agua
+    Mat Gx, Gy;
+    Sobel(S, Gx, CV_32F, 1, 0, 3, grado, 0, BORDER_REFLECT);
+    Sobel(S, Gy, CV_32F, 0, 1, 3, grado, 0 , BORDER_REFLECT);
+    multiply(S, Gx, Gx);
+    multiply(S, Gy, Gy);
+    for(int y=0; y<S.rows; y++)
+        for(int x=0; x<S.cols; x++) {
+            Gx.at<float>(y, x) += x;
+            Gy.at<float>(y, x) += y;
+        }
+    Mat imgres;
+    remap(foto[nfoto].img, imgres, Gx, Gy, INTER_LINEAR, BORDER_REFLECT);
+    imshow("Pinchar/estirar", imgres);
+
+    if(guardar){
+        imgres.copyTo(foto[nfoto].img);
+        foto[nfoto].modificada = true;
+        mostrar(nfoto);
+    }
+}
+
+//---------------------------------------------------------------------------
+
 void ver_suavizado (int nfoto, int ntipo, int tamx, int tamy, bool guardar)
 {
     assert(nfoto>=0 && nfoto<MAX_VENTANAS && foto[nfoto].usada);

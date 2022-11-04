@@ -20,6 +20,7 @@ SOURCES += main.cpp\
     imagenes.cpp \
     dialognueva.cpp \
     brillocontraste.cpp \
+    pincharestirar.cpp \
     suavizados.cpp \
     video.cpp \
     rotaravideo.cpp \
@@ -32,6 +33,7 @@ HEADERS  += mainwindow.h \
     imagenes.h \
     dialognueva.h \
     brillocontraste.h \
+    pincharestirar.h \
     suavizados.h \
     video.h \
     rotaravideo.h \
@@ -43,6 +45,7 @@ FORMS    += mainwindow.ui \
     dbajorrelieve.ui \
     dialognueva.ui \
     brillocontraste.ui \
+    pincharestirar.ui \
     suavizados.ui \
     rotaravideo.ui \
     mediaponderada.ui \
