@@ -18,6 +18,8 @@ using namespace cv;
 #include "suavizados.h"
 #include "dbajorrelieve.h"
 #include "pincharestirar.h"
+#include "matsatlum.h"
+#include "perfilado.h"
 
 QString FiltroImagen = "Todos los formatos (*.jpg *.jpeg *.jpe .jp2 *.tif *.tiff *.png *.gif *.bmp *.dib *.webp *.ppm);;Archivos JPG (*.jpg *.jpeg *.jpe);;Archivos TIF (*.tif *.tiff);;Archivos PNG (*.png);;Archivos GIF (*.gif);;Archivos BMP (*.bmp *.dib);;Otros (*.*)";
 
@@ -408,8 +410,24 @@ void MainWindow::on_actionEscala_de_color_triggered()
 
 void MainWindow::on_actionPinchar_Estirar_triggered()
 {
-    if(foto_activa() != -1){
+    if (foto_activa() != -1){
         PincharEstirar p(foto_activa());
+        p.exec();
+    }
+}
+
+void MainWindow::on_actionMatiz_saturaci_n_luminosidad_triggered()
+{
+    if (foto_activa() != -1){
+        MatSatLum msl(foto_activa());
+        msl.exec();
+    }
+}
+
+void MainWindow::on_actionPerfilado_triggered()
+{
+    if (foto_activa() != -1){
+        Perfilado p(foto_activa());
         p.exec();
     }
 }

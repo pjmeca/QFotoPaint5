@@ -780,6 +780,51 @@ void ver_suavizado (int nfoto, int ntipo, int tamx, int tamy, bool guardar)
 
 //---------------------------------------------------------------------------
 
+void ver_matsatlum (int nfoto, int matiz, double sat,
+                    double lum, bool guardar)
+{
+    Mat hls;
+    cvtColor(foto[nfoto].img, hls, COLOR_BGR2HLS_FULL);
+    Mat canales[3];
+    split(hls, canales);
+    canales[0].convertTo(canales[0], CV_16S, 1, matiz);
+    bitwise_and(canales[0], 255, canales[0]);
+    canales[0].convertTo(canales[0], CV_8U);
+    canales[1] *= lum;
+    canales[2] *= sat;
+    merge(canales, 3, hls);
+    Mat imgres;
+    cvtColor(hls, imgres, COLOR_HLS2BGR_FULL);
+
+    imshow(foto[nfoto].nombre, imgres);
+    if(guardar){
+        imgres.copyTo(foto[nfoto].img);
+        foto[nfoto].modificada = true;
+    }
+}
+
+//---------------------------------------------------------------------------
+
+void ver_perfilado (int nfoto, double grado,
+                    int radio, bool guardar)
+{
+    Mat laplace;
+    Laplacian(foto[nfoto].img, laplace, CV_16S, radio, -grado, 0, BORDER_REFLECT);
+    Mat img16;
+    foto[nfoto].img.convertTo(img16, CV_16S);
+    img16 += laplace;
+    Mat imgres;
+    img16.convertTo(imgres, CV_8U);
+
+    imshow(foto[nfoto].nombre, imgres);
+    if(guardar){
+        imgres.copyTo(foto[nfoto].img);
+        foto[nfoto].modificada = true;
+    }
+}
+
+//---------------------------------------------------------------------------
+
 void media_ponderada (int nf1, int nf2, int nueva, double peso)
 {
     assert(nf1>=0 && nf1<MAX_VENTANAS && foto[nf1].usada);

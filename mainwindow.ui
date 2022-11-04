@@ -465,6 +465,7 @@ p, li { white-space: pre-wrap; }
      <addaction name="actionRotar_91"/>
     </widget>
     <addaction name="actionBrillo_contraste"/>
+    <addaction name="actionMatiz_saturaci_n_luminosidad"/>
     <addaction name="actionInvertir"/>
     <addaction name="menuRotar"/>
     <addaction name="actionMedia_ponderada"/>
@@ -483,6 +484,7 @@ p, li { white-space: pre-wrap; }
      <addaction name="actionMediana"/>
     </widget>
     <addaction name="menuSuavizado"/>
+    <addaction name="actionPerfilado"/>
     <addaction name="actionBajorrelieve"/>
     <addaction name="actionPinchar_Estirar"/>
    </widget>
@@ -710,6 +712,16 @@ p, li { white-space: pre-wrap; }
   <action name="actionPinchar_Estirar">
    <property name="text">
     <string>Pinchar/Estirar...</string>
+   </property>
+  </action>
+  <action name="actionMatiz_saturaci_n_luminosidad">
+   <property name="text">
+    <string>Matiz/saturación/luminosidad...</string>
+   </property>
+  </action>
+  <action name="actionPerfilado">
+   <property name="text">
+    <string>Perfilado...</string>
    </property>
   </action>
  </widget>

@@ -162,6 +162,15 @@ void ver_suavizado (int nfoto, int ntipo, int tamx, int tamy,
 // puede ser: 1=GAUSIANO; 2=MEDIA. Si guardar==true se guarda la imagen, y
 // en otro caso solo se visualiza el resultado, pero sin guardar
 
+void ver_matsatlum (int nfoto, int matiz, double sat,
+                    double lum, bool guardar= false);
+// Ajuste de matiz/saturación/luminosidad basado en HLS
+
+void ver_perfilado (int nfoto, double grado,
+                    int radio, bool guardar= false);
+
+// Operación de perfilado usando Laplaciana
+
 void media_ponderada (int nf1, int nf2, int nueva, double peso);
 // Calcula la media ponderada entre la imagen nf1 y la nf2, según el peso dado,
 // y almacena el resultado en la posición nueva. Se aplica la fórmula:
