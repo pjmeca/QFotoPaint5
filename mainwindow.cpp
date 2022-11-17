@@ -20,6 +20,7 @@ using namespace cv;
 #include "pincharestirar.h"
 #include "matsatlum.h"
 #include "perfilado.h"
+#include "perspectiva.h"
 
 QString FiltroImagen = "Todos los formatos (*.jpg *.jpeg *.jpe .jp2 *.tif *.tiff *.png *.gif *.bmp *.dib *.webp *.ppm);;Archivos JPG (*.jpg *.jpeg *.jpe);;Archivos TIF (*.tif *.tiff);;Archivos PNG (*.png);;Archivos GIF (*.gif);;Archivos BMP (*.bmp *.dib);;Otros (*.*)";
 
@@ -428,6 +429,14 @@ void MainWindow::on_actionPerfilado_triggered()
 {
     if (foto_activa() != -1){
         Perfilado p(foto_activa());
+        p.exec();
+    }
+}
+
+void MainWindow::on_actionPerspectiva_triggered()
+{
+    if(foto_activa() != -1) {
+        Perspectiva p;
         p.exec();
     }
 }

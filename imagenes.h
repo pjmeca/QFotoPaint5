@@ -168,8 +168,10 @@ void ver_matsatlum (int nfoto, int matiz, double sat,
 
 void ver_perfilado (int nfoto, double grado,
                     int radio, bool guardar= false);
-
 // Operación de perfilado usando Laplaciana
+
+void ver_perspectiva(int nfoto1, int nfoto2, Point2f pt1[], Point2f pt2[], bool guardar=false);
+// Aplicación de la transformación perspectiva
 
 void media_ponderada (int nf1, int nf2, int nueva, double peso);
 // Calcula la media ponderada entre la imagen nf1 y la nf2, según el peso dado,

@@ -825,6 +825,26 @@ void ver_perfilado (int nfoto, double grado,
 
 //---------------------------------------------------------------------------
 
+void ver_perspectiva(int nfoto1, int nfoto2, Point2f pt1[], Point2f pt2[], bool guardar)
+{
+    Mat m=getPerspectiveTransform(pt1, pt2);
+    Mat imres = foto[nfoto2].img.clone();
+    warpPerspective(foto[nfoto1].img, imres, m, imres.size(), INTER_LINEAR, BORDER_TRANSPARENT);
+    if (guardar) {
+        imres.copyTo(foto[nfoto2].img);
+        foto[nfoto2].modificada = true;
+        mostrar(nfoto2);
+    } else{
+        for(int i=0; i<4; i++)
+            line(imres, pt2[i], pt2[(i+1)%4], CV_RGB(0,0,0), 2);
+        for(int i=0; i<4; i++)
+            circle(imres, pt2[i], 10, CV_RGB(255, 0, 0), -1);
+        imshow("Perspectiva", imres);
+    }
+}
+
+//---------------------------------------------------------------------------
+
 void media_ponderada (int nf1, int nf2, int nueva, double peso)
 {
     assert(nf1>=0 && nf1<MAX_VENTANAS && foto[nf1].usada);

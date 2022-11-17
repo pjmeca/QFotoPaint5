@@ -75,6 +75,7 @@ private slots:
     void on_actionPinchar_Estirar_triggered();
     void on_actionMatiz_saturaci_n_luminosidad_triggered();
     void on_actionPerfilado_triggered();
+    void on_actionPerspectiva_triggered();
 };
 
 extern MainWindow *w;
