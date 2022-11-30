@@ -504,6 +504,7 @@ p, li { white-space: pre-wrap; }
       <string>Vídeo a imagen</string>
      </property>
      <addaction name="actionImagen_media"/>
+     <addaction name="actionMovimiento"/>
     </widget>
     <addaction name="menuImagen_a_v_deo"/>
     <addaction name="menuV_deo_a_imagen"/>
@@ -728,6 +729,11 @@ p, li { white-space: pre-wrap; }
   <action name="actionPerspectiva">
    <property name="text">
     <string>Perspectiva...</string>
+   </property>
+  </action>
+  <action name="actionMovimiento">
+   <property name="text">
+    <string>Movimiento...</string>
    </property>
   </action>
  </widget>

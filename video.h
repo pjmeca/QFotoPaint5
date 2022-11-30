@@ -26,6 +26,10 @@ void acumular_media (bool primera= false);
 // Captura una imagen de la cámara y la acumula en una media. La cámara debe
 // estar inicializada. Si primera==true significa que es la primera imagen
 
+void movimiento(string nombre, int framei, int framef,
+                int nres);
+// operación de movimiento en vídeo entre framei y framef
+
 void media_a_nueva (int nfoto);
 // Almacena la imagen media actual en la entrada nfoto
 

@@ -76,6 +76,7 @@ private slots:
     void on_actionMatiz_saturaci_n_luminosidad_triggered();
     void on_actionPerfilado_triggered();
     void on_actionPerspectiva_triggered();
+    void on_actionMovimiento_triggered();
 };
 
 extern MainWindow *w;

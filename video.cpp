@@ -101,6 +101,38 @@ void acumular_media (bool primera)
 
 //---------------------------------------------------------------------------
 
+void movimiento(string nombre, int framei, int framef,
+                int nres)
+{
+    VideoCapture cap(nombre);
+    if (cap.isOpened()) {
+        cap.set(CAP_PROP_POS_FRAMES, framei);
+        Mat frame;
+        if (cap.read(frame)) {
+            Mat acum(frame.size(), CV_32SC3, Scalar(0,0,0));
+            Mat frame_ant = frame.clone();
+            Mat dif, dif32;
+            Mat acum8u;
+            framei++;
+            while (framei <= framef && cap.read(frame) && waitKey(1)==-1) {
+                absdiff(frame, frame_ant, dif);
+                dif.convertTo(dif32, CV_32S);
+                acum += dif32;
+                frame.copyTo(frame_ant);
+                imshow("Video", frame);
+                normalize(acum, acum8u, 0, 255, NORM_MINMAX, CV_8U);
+                imshow("Acumulado", acum8u);
+                framei++;
+            }
+            crear_nueva(nres, acum);
+            destroyWindow("Video");
+            destroyWindow("Acumulado");
+        }
+    }
+}
+
+//---------------------------------------------------------------------------
+
 void media_a_nueva (int nfoto)
 {
     Mat res(img_media.size(), CV_8UC3);
