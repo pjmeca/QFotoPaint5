@@ -7,6 +7,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <assert.h>
+#include <QClipboard>
 
 ///////////////////////////////////////////////////////////////////
 /////////  VARIABLES GLOBALES                        //////////////
@@ -926,6 +927,20 @@ void ver_histograma(int nfoto, int nres, int canal)
     }
 
     crear_nueva(nres, imghist);
+}
+
+//---------------------------------------------------------------------------
+
+void nueva_portapapeles()
+{
+    QClipboard* clip = QApplication::clipboard();
+    QImage imagen = clip->image(QClipboard::Clipboard);
+    Mat mat = Mat(imagen.height(), imagen.width(), CV_8UC4, imagen.scanLine(0));
+
+    int pl= primera_libre();
+    if (pl != -1) {
+        crear_nueva(pl, mat.clone());
+    }
 }
 
 //---------------------------------------------------------------------------

@@ -79,6 +79,7 @@ private slots:
     void on_actionMovimiento_triggered();
     void on_actionAjuste_lineal_triggered();
     void on_actionCapturar_de_v_deo_triggered();
+    void on_actionNueva_desde_portapapeles_triggered();
 };
 
 extern MainWindow *w;

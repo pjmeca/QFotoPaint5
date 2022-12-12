@@ -407,6 +407,7 @@ p, li { white-space: pre-wrap; }
     </property>
     <addaction name="actionNueva_imagen"/>
     <addaction name="actionAbrir_imagen"/>
+    <addaction name="actionNueva_desde_portapapeles"/>
     <addaction name="actionCapturar_de_c_mara"/>
     <addaction name="actionCapturar_de_v_deo"/>
     <addaction name="separator"/>
@@ -746,6 +747,11 @@ p, li { white-space: pre-wrap; }
   <action name="actionCapturar_de_v_deo">
    <property name="text">
     <string>Capturar de vídeo...</string>
+   </property>
+  </action>
+  <action name="actionNueva_desde_portapapeles">
+   <property name="text">
+    <string>Nueva desde portapapeles</string>
    </property>
   </action>
  </widget>

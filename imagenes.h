@@ -190,4 +190,7 @@ void ver_histograma(int nfoto, int nres, int canal);
 // Calcular el histograma de nfoto en el canal dado
 // y mostrar en nres
 
+void nueva_portapapeles();
+// Crea una nueva imagen a partir de la última copiada en el portapapeles.
+
 #endif // IMAGENES_H

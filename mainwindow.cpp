@@ -491,3 +491,8 @@ void MainWindow::on_actionCapturar_de_v_deo_triggered()
             cdv.exec();
     }
 }
+
+void MainWindow::on_actionNueva_desde_portapapeles_triggered()
+{
+    nueva_portapapeles();
+}
