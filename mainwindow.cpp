@@ -496,3 +496,23 @@ void MainWindow::on_actionNueva_desde_portapapeles_triggered()
 {
     nueva_portapapeles();
 }
+
+void MainWindow::on_actionCopiar_al_portapapeles_triggered()
+{
+    int fa = foto_activa();
+    if (fa != -1) {
+        Mat nueva = foto[fa].img(foto[fa].roi).clone();
+        copiar_en_portapapeles(nueva);
+    }
+}
+
+void MainWindow::on_toolButton_10_clicked()
+{
+    herr_actual = HER_TRAZO;
+}
+
+void MainWindow::on_actionTrazo_triggered()
+{
+    herr_actual = HER_TRAZO;
+    ui->toolButton_10->setChecked(true);
+}

@@ -274,7 +274,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QToolButton" name="toolButton_6">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>370</x>
       <y>0</y>
       <width>41</width>
       <height>41</height>
@@ -319,7 +319,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QToolButton" name="toolButton_7">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>290</x>
       <y>0</y>
       <width>41</width>
       <height>41</height>
@@ -348,7 +348,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QToolButton" name="toolButton_8">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>330</x>
       <y>0</y>
       <width>41</width>
       <height>41</height>
@@ -383,6 +383,35 @@ p, li { white-space: pre-wrap; }
     <property name="icon">
      <iconset resource="recursos.qrc">
       <normaloff>:/imagenes/rainbowcircle.png</normaloff>:/imagenes/rainbowcircle.png</iconset>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="autoExclusive">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="toolButton_10">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>0</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="recursos.qrc">
+      <normaloff>:/imagenes/trazo.png</normaloff>:/imagenes/trazo.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>32</width>
+      <height>32</height>
+     </size>
     </property>
     <property name="checkable">
      <bool>true</bool>
@@ -439,6 +468,7 @@ p, li { white-space: pre-wrap; }
     </widget>
     <addaction name="actionSeleccionar_todo"/>
     <addaction name="actioncopiar_a_nueva"/>
+    <addaction name="actionCopiar_al_portapapeles"/>
     <addaction name="separator"/>
     <addaction name="menuOpciones"/>
     <addaction name="menuHistogramas"/>
@@ -448,11 +478,12 @@ p, li { white-space: pre-wrap; }
      <string>Herramientas</string>
     </property>
     <addaction name="actionPunto"/>
+    <addaction name="actionArco_ris"/>
     <addaction name="actionLinea"/>
+    <addaction name="actionTrazo"/>
     <addaction name="actionRect_ngulo"/>
     <addaction name="actionElipse"/>
     <addaction name="actionSeleccionar"/>
-    <addaction name="actionArco_ris"/>
    </widget>
    <widget class="QMenu" name="menuTransformar">
     <property name="title">
@@ -752,6 +783,16 @@ p, li { white-space: pre-wrap; }
   <action name="actionNueva_desde_portapapeles">
    <property name="text">
     <string>Nueva desde portapapeles</string>
+   </property>
+  </action>
+  <action name="actionCopiar_al_portapapeles">
+   <property name="text">
+    <string>Copiar al portapapeles</string>
+   </property>
+  </action>
+  <action name="actionTrazo">
+   <property name="text">
+    <string>Trazo</string>
    </property>
   </action>
  </widget>

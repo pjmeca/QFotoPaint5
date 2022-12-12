@@ -40,7 +40,7 @@ struct ventana {
 //    Enumerado con los distintos tipos posibles de herramientas
 //    que se pueden usar. Añadir nuevas aquí
 
-enum tipo_herramienta {HER_PUNTO, HER_LINEA, HER_RECTANGULO, HER_ELIPSE, HER_SELECCION, HER_ARCOIRIS};
+enum tipo_herramienta {HER_PUNTO, HER_LINEA, HER_RECTANGULO, HER_ELIPSE, HER_SELECCION, HER_ARCOIRIS, HER_TRAZO};
 
 
 ///////////////////////////////////////////////////////////////////
@@ -192,5 +192,8 @@ void ver_histograma(int nfoto, int nres, int canal);
 
 void nueva_portapapeles();
 // Crea una nueva imagen a partir de la última copiada en el portapapeles.
+
+void copiar_en_portapapeles(Mat imagen);
+// Copia el ROI de la imagen actual en el portapapeles.
 
 #endif // IMAGENES_H

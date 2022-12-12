@@ -80,6 +80,9 @@ private slots:
     void on_actionAjuste_lineal_triggered();
     void on_actionCapturar_de_v_deo_triggered();
     void on_actionNueva_desde_portapapeles_triggered();
+    void on_actionCopiar_al_portapapeles_triggered();
+    void on_toolButton_10_clicked();
+    void on_actionTrazo_triggered();
 };
 
 extern MainWindow *w;

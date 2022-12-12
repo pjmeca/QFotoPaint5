@@ -572,7 +572,7 @@ void callback (int event, int x, int y, int flags, void *_nfoto)
             ninguna_accion(factual, x, y);
         break;
 
-    // 2.1. Herramienta PUNTO
+        // 2.5. Herramienta PUNTO ARCOÍRIS
     case HER_ARCOIRIS:
         if (flags==EVENT_FLAG_LBUTTON)
             cb_arcoiris(factual, x, y);
@@ -580,12 +580,24 @@ void callback (int event, int x, int y, int flags, void *_nfoto)
             ninguna_accion(factual, x, y);
         break;
 
-        // 2.5. Herramienta SELECCION
+        // 2.6. Herramienta SELECCION
     case HER_SELECCION:
         if (event==EVENT_LBUTTONUP)
             cb_seleccionar(factual, x, y);
         else if (event==EVENT_MOUSEMOVE)
             cb_ver_seleccion(factual, x, y, flags!=EVENT_FLAG_LBUTTON);
+        break;
+
+        // 2.7. Herramienta TRAZO
+    case HER_TRAZO:
+        if (flags==EVENT_FLAG_LBUTTON){
+            cb_punto(factual, x, y);
+            cb_linea(factual, x, y);
+            downx = x;
+            downy = y;
+        }
+        else
+            ninguna_accion(factual, x, y);
         break;
     }
     escribir_barra_estado();
@@ -941,6 +953,17 @@ void nueva_portapapeles()
     if (pl != -1) {
         crear_nueva(pl, mat.clone());
     }
+}
+
+//---------------------------------------------------------------------------
+
+void copiar_en_portapapeles(Mat imagen)
+{
+    QClipboard* clip = QApplication::clipboard();
+
+    QImage img((unsigned char*) imagen.data, imagen.cols, imagen.rows, imagen.step, QImage::Format_RGBA8888);
+
+    clip->setImage(img, QClipboard::Clipboard);
 }
 
 //---------------------------------------------------------------------------
