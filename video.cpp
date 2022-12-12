@@ -119,13 +119,13 @@ void movimiento(string nombre, int framei, int framef,
                 dif.convertTo(dif32, CV_32S);
                 acum += dif32;
                 frame.copyTo(frame_ant);
-                imshow("Video", frame);
+                imshow("Vídeo", frame);
                 normalize(acum, acum8u, 0, 255, NORM_MINMAX, CV_8U);
                 imshow("Acumulado", acum8u);
                 framei++;
             }
-            crear_nueva(nres, acum);
-            destroyWindow("Video");
+            crear_nueva(nres, acum8u);
+            destroyWindow("Vídeo");
             destroyWindow("Acumulado");
         }
     }
