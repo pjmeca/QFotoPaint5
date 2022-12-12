@@ -73,6 +73,24 @@ void MainWindow::changeEvent(QEvent *e)
 
 void MainWindow::on_actionSalir_triggered()
 {
+    int fa= foto_activa();
+    while (fa != -1) {
+        if (foto[fa].modificada && preguntar_guardar) {
+            QString nombre= QString::fromStdString(foto[fa].nombre);
+            nombre= "El archivo " + nombre + " ha sido modificado.\n¿Desea guardarlo?";
+            int resp= QMessageBox::question(this, "Archivo modificado", nombre,
+                                            QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+            if (resp==QMessageBox::Yes)
+                guardar_foto(fa);
+            else if (resp==QMessageBox::Cancel)
+                return;
+            else
+                foto[fa].modificada= false;
+        }
+        cerrar_foto(fa);
+        fa= foto_activa();
+    }
+
     close();
 }
 
