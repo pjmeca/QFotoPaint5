@@ -23,8 +23,6 @@ private slots:
 
     void on_spinBox_valueChanged(int arg1);
 
-    void on_buttonBox_accepted();
-
     void on_Capturardevideo_rejected();
 
     void on_Capturardevideo_accepted();
