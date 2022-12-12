@@ -83,6 +83,7 @@ private slots:
     void on_actionCopiar_al_portapapeles_triggered();
     void on_toolButton_10_clicked();
     void on_actionTrazo_triggered();
+    void on_actionInformaci_n_triggered();
 };
 
 extern MainWindow *w;

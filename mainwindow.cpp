@@ -24,6 +24,7 @@ using namespace cv;
 #include "movimiento.h"
 #include "ajustelineal.h"
 #include "capturardevideo.h"
+#include "informacion.h"
 
 QString FiltroImagen = "Todos los formatos (*.jpg *.jpeg *.jpe .jp2 *.tif *.tiff *.png *.gif *.bmp *.dib *.webp *.ppm);;Archivos JPG (*.jpg *.jpeg *.jpe);;Archivos TIF (*.tif *.tiff);;Archivos PNG (*.png);;Archivos GIF (*.gif);;Archivos BMP (*.bmp *.dib);;Otros (*.*)";
 
@@ -515,4 +516,14 @@ void MainWindow::on_actionTrazo_triggered()
 {
     herr_actual = HER_TRAZO;
     ui->toolButton_10->setChecked(true);
+}
+
+void MainWindow::on_actionInformaci_n_triggered()
+{
+    int fa = foto_activa();
+    if (fa != -1) {
+        Mat img = foto[fa].img.clone();
+        Informacion i(img);
+        i.exec();
+    }
 }

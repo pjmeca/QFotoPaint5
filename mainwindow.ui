@@ -472,6 +472,8 @@ p, li { white-space: pre-wrap; }
     <addaction name="separator"/>
     <addaction name="menuOpciones"/>
     <addaction name="menuHistogramas"/>
+    <addaction name="separator"/>
+    <addaction name="actionInformaci_n"/>
    </widget>
    <widget class="QMenu" name="menuHerramientas">
     <property name="title">
@@ -793,6 +795,11 @@ p, li { white-space: pre-wrap; }
   <action name="actionTrazo">
    <property name="text">
     <string>Trazo</string>
+   </property>
+  </action>
+  <action name="actionInformaci_n">
+   <property name="text">
+    <string>Información</string>
    </property>
   </action>
  </widget>
