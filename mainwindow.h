@@ -77,6 +77,8 @@ private slots:
     void on_actionPerfilado_triggered();
     void on_actionPerspectiva_triggered();
     void on_actionMovimiento_triggered();
+    void on_actionAjuste_lineal_triggered();
+    void on_actionCapturar_de_v_deo_triggered();
 };
 
 extern MainWindow *w;

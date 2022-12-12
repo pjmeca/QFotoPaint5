@@ -22,6 +22,8 @@ using namespace cv;
 #include "perfilado.h"
 #include "perspectiva.h"
 #include "movimiento.h"
+#include "ajustelineal.h"
+#include "capturardevideo.h"
 
 QString FiltroImagen = "Todos los formatos (*.jpg *.jpeg *.jpe .jp2 *.tif *.tiff *.png *.gif *.bmp *.dib *.webp *.ppm);;Archivos JPG (*.jpg *.jpeg *.jpe);;Archivos TIF (*.tif *.tiff);;Archivos PNG (*.png);;Archivos GIF (*.gif);;Archivos BMP (*.bmp *.dib);;Otros (*.*)";
 
@@ -451,5 +453,23 @@ void MainWindow::on_actionMovimiento_triggered()
             if(mv.isOpened())
                 mv.exec();
         }
+    }
+}
+
+void MainWindow::on_actionAjuste_lineal_triggered()
+{
+    if(foto_activa() != -1){
+        Ajustelineal al(foto_activa());
+        al.exec();
+    }
+}
+
+void MainWindow::on_actionCapturar_de_v_deo_triggered()
+{
+    QString nombre = QFileDialog::getOpenFileName();
+    if (!nombre.isEmpty()) {
+        Capturardevideo cdv(nombre);
+        if (cdv.isOpened())
+            cdv.exec();
     }
 }

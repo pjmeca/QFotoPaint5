@@ -162,6 +162,10 @@ void ver_suavizado (int nfoto, int ntipo, int tamx, int tamy,
 // puede ser: 1=GAUSIANO; 2=MEDIA. Si guardar==true se guarda la imagen, y
 // en otro caso solo se visualiza el resultado, pero sin guardar
 
+void ver_ajuste_lineal(int nfoto, double pmin,
+                       double pmax, bool guardar=false);
+// Operación de ajuste lineal del histograma
+
 void ver_matsatlum (int nfoto, int matiz, double sat,
                     double lum, bool guardar= false);
 // Ajuste de matiz/saturación/luminosidad basado en HLS

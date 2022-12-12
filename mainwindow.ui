@@ -408,6 +408,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionNueva_imagen"/>
     <addaction name="actionAbrir_imagen"/>
     <addaction name="actionCapturar_de_c_mara"/>
+    <addaction name="actionCapturar_de_v_deo"/>
     <addaction name="separator"/>
     <addaction name="actionGuardar"/>
     <addaction name="actionGuardar_como"/>
@@ -469,6 +470,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionInvertir"/>
     <addaction name="menuRotar"/>
     <addaction name="actionMedia_ponderada"/>
+    <addaction name="actionAjuste_lineal"/>
     <addaction name="actionEscala_de_color"/>
     <addaction name="actionPerspectiva"/>
    </widget>
@@ -734,6 +736,16 @@ p, li { white-space: pre-wrap; }
   <action name="actionMovimiento">
    <property name="text">
     <string>Movimiento...</string>
+   </property>
+  </action>
+  <action name="actionAjuste_lineal">
+   <property name="text">
+    <string>Ajuste lineal...</string>
+   </property>
+  </action>
+  <action name="actionCapturar_de_v_deo">
+   <property name="text">
+    <string>Capturar de vídeo...</string>
    </property>
   </action>
  </widget>
