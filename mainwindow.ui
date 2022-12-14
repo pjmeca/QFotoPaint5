@@ -543,9 +543,15 @@ p, li { white-space: pre-wrap; }
      <addaction name="actionM_nima_y_m_xima"/>
      <addaction name="actionMovimiento"/>
     </widget>
+    <widget class="QMenu" name="menuV_deo_a_video">
+     <property name="title">
+      <string>Vídeo a video</string>
+     </property>
+     <addaction name="actionSuavizado_temporal"/>
+    </widget>
     <addaction name="menuImagen_a_v_deo"/>
     <addaction name="menuV_deo_a_imagen"/>
-    <addaction name="actionV_deo_a_video"/>
+    <addaction name="menuV_deo_a_video"/>
    </widget>
    <widget class="QMenu" name="menuAyuda">
     <property name="title">
@@ -666,11 +672,6 @@ p, li { white-space: pre-wrap; }
   <action name="actionMedia">
    <property name="text">
     <string>Media...</string>
-   </property>
-  </action>
-  <action name="actionV_deo_a_video">
-   <property name="text">
-    <string>Vídeo a video</string>
    </property>
   </action>
   <action name="actionRotar_imagen">
@@ -806,6 +807,11 @@ p, li { white-space: pre-wrap; }
   <action name="actionM_nima_y_m_xima">
    <property name="text">
     <string>Mínima y máxima...</string>
+   </property>
+  </action>
+  <action name="actionSuavizado_temporal">
+   <property name="text">
+    <string>Suavizado temporal...</string>
    </property>
   </action>
  </widget>

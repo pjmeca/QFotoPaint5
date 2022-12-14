@@ -175,6 +175,44 @@ void minMax(string nombre, int framei, int framef,
     }
 }
 
+//----------------------------------------------------------------------------
+
+void suavizadoTemporalVideo(string nombreVideoOriginal, string nombreVideoSalida, int n)
+{
+    VideoCapture cap(nombreVideoOriginal);
+    if (cap.isOpened()) {
+        int framei=0;
+        cap.set(CAP_PROP_POS_FRAMES, 1);
+        Mat frame;
+        Mat *nAnteriores = new Mat[n];
+        if (cap.read(frame)) {
+           VideoWriter writer(nombreVideoSalida, cap.get(CAP_PROP_FOURCC), cap.get(CAP_PROP_FPS), frame.size());
+           if(writer.isOpened()){
+               int ntotal=0;
+               nAnteriores[0]=frame.clone();
+               ntotal++;
+               framei++;
+               while (cap.read(frame) && waitKey(1)==-1) {
+                   Mat media=nAnteriores[0].clone()/n;
+                   for(int i=1;i<ntotal;i++){
+                       media+=nAnteriores[i]/n;
+                   }
+                   media.convertTo(media,CV_8U);
+                   imshow("Suavizado media", media);
+                   writer << media;
+                   if(ntotal<n)
+                       ntotal++;
+                   nAnteriores[framei%n]=frame.clone();
+                   framei++;
+               }
+               writer.release();
+               destroyWindow("Suavizado media");
+            }
+        }
+        delete[] nAnteriores;
+    }
+}
+
 //---------------------------------------------------------------------------
 
 void media_a_nueva (int nfoto)

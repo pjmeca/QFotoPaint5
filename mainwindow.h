@@ -85,6 +85,7 @@ private slots:
     void on_actionTrazo_triggered();
     void on_actionInformaci_n_triggered();
     void on_actionM_nima_y_m_xima_triggered();
+    void on_actionSuavizado_temporal_triggered();
 };
 
 extern MainWindow *w;

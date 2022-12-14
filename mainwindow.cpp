@@ -26,6 +26,7 @@ using namespace cv;
 #include "capturardevideo.h"
 #include "informacion.h"
 #include "minmaxvideo.h"
+#include "suavizadotemporal.h"
 
 QString FiltroImagen = "Todos los formatos (*.jpg *.jpeg *.jpe .jp2 *.tif *.tiff *.png *.gif *.bmp *.dib *.webp *.ppm);;Archivos JPG (*.jpg *.jpeg *.jpe);;Archivos TIF (*.tif *.tiff);;Archivos PNG (*.png);;Archivos GIF (*.gif);;Archivos BMP (*.bmp *.dib);;Otros (*.*)";
 
@@ -539,5 +540,14 @@ void MainWindow::on_actionM_nima_y_m_xima_triggered()
             if(m.isOpened())
                 m.exec();
         }
+    }
+}
+
+void MainWindow::on_actionSuavizado_temporal_triggered()
+{
+    QString nombreVideo = QFileDialog::getOpenFileName();
+    if (!nombreVideo.isEmpty()) {
+        suavizadoTemporal s(nombreVideo);
+        s.exec();
     }
 }
