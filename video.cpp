@@ -133,6 +133,50 @@ void movimiento(string nombre, int framei, int framef,
 
 //---------------------------------------------------------------------------
 
+void minMax(string nombre, int framei, int framef,
+                int nres1, int nres2)
+{
+    VideoCapture cap(nombre);
+    if (cap.isOpened()) {
+        cap.set(CAP_PROP_POS_FRAMES, framei);
+        Mat frame;
+        if (cap.read(frame)) {
+
+            Mat maxFrame = frame.clone();
+            Mat minFrame = frame.clone();
+            Mat dif;
+            Mat maxFrame8u, minFrame8u;
+            Mat aux;
+            framei++;
+
+            while (framei <= framef && cap.read(frame) && waitKey(1)==-1) {
+
+                maxFrame.convertTo(aux, frame.type());
+                max(frame, aux, dif);
+                dif.convertTo(maxFrame, CV_32S);
+                maxFrame.convertTo(maxFrame8u, CV_8U);
+
+                minFrame.convertTo(aux, frame.type());
+                min(frame, aux, dif);
+                dif.convertTo(minFrame, CV_32S);
+                minFrame.convertTo(minFrame8u, CV_8U);
+
+                imshow("Valor máximo", maxFrame8u);
+                imshow("Valor mínimo", minFrame8u);
+
+                framei++;
+            }
+            crear_nueva(nres1, maxFrame8u);
+            crear_nueva(nres2, minFrame8u);
+
+            destroyWindow("Valor máximo");
+            destroyWindow("Valor mínimo");
+        }
+    }
+}
+
+//---------------------------------------------------------------------------
+
 void media_a_nueva (int nfoto)
 {
     Mat res(img_media.size(), CV_8UC3);

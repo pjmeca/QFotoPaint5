@@ -25,6 +25,7 @@ using namespace cv;
 #include "ajustelineal.h"
 #include "capturardevideo.h"
 #include "informacion.h"
+#include "minmaxvideo.h"
 
 QString FiltroImagen = "Todos los formatos (*.jpg *.jpeg *.jpe .jp2 *.tif *.tiff *.png *.gif *.bmp *.dib *.webp *.ppm);;Archivos JPG (*.jpg *.jpeg *.jpe);;Archivos TIF (*.tif *.tiff);;Archivos PNG (*.png);;Archivos GIF (*.gif);;Archivos BMP (*.bmp *.dib);;Otros (*.*)";
 
@@ -525,5 +526,18 @@ void MainWindow::on_actionInformaci_n_triggered()
         Mat img = foto[fa].img.clone();
         Informacion i(img);
         i.exec();
+    }
+}
+
+void MainWindow::on_actionM_nima_y_m_xima_triggered()
+{
+    if (primera_libre() != -1) {
+        QString nombre = QFileDialog::getOpenFileName();
+        int n = primera_libre();
+        if (!nombre.isEmpty() && n+1<MAX_VENTANAS) {
+            minMaxVideo m(nombre, n, n+1);
+            if(m.isOpened())
+                m.exec();
+        }
     }
 }

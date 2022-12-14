@@ -30,6 +30,10 @@ void movimiento(string nombre, int framei, int framef,
                 int nres);
 // operación de movimiento en vídeo entre framei y framef
 
+void minMax(string nombre, int framei, int framef,
+                int nres1, int nres2);
+// obtener dos imágenes con el mínimo y el máximo entre framei y framef
+
 void media_a_nueva (int nfoto);
 // Almacena la imagen media actual en la entrada nfoto
 

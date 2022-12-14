@@ -24,6 +24,7 @@ SOURCES += main.cpp\
     dialognueva.cpp \
     brillocontraste.cpp \
     matsatlum.cpp \
+    minmaxvideo.cpp \
     movimiento.cpp \
     perfilado.cpp \
     perspectiva.cpp \
@@ -44,6 +45,7 @@ HEADERS  += mainwindow.h \
     brillocontraste.h \
     informacion.h \
     matsatlum.h \
+    minmaxvideo.h \
     movimiento.h \
     perfilado.h \
     perspectiva.h \
@@ -63,6 +65,7 @@ FORMS    += mainwindow.ui \
     brillocontraste.ui \
     informacion.ui \
     matsatlum.ui \
+    minmaxvideo.ui \
     movimiento.ui \
     perfilado.ui \
     perspectiva.ui \
