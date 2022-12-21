@@ -555,6 +555,8 @@ void MainWindow::on_actionSuavizado_temporal_triggered()
 
 void MainWindow::on_actionTransici_n_entre_im_genes_triggered()
 {
-    TransicionImagenes t;
-    t.exec();
+    if(foto_activa() != -1){
+        TransicionImagenes t;
+        t.exec();
+    }
 }

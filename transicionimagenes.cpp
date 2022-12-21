@@ -23,9 +23,6 @@ TransicionImagenes::TransicionImagenes(QWidget *parent) :
             }
         }
     }
-    imgUno= foto[nfoto1].img;
-    imgDos.create(imgUno.size(), imgUno.type());
-    imgRes.create(imgUno.size(), imgUno.type());
     ui->listWidget->setCurrentRow(cur_row);
     if (parent)
         move(parent->x()+DESP_X_HIJO, parent->y()+DESP_Y_HIJO);
@@ -39,7 +36,6 @@ TransicionImagenes::~TransicionImagenes()
 void TransicionImagenes::on_listWidget_currentRowChanged(int currentRow)
 {
     nfoto2= corresp[currentRow];
-    cv::resize(foto[nfoto2].img, imgDos, imgUno.size(), 0, 0, INTER_CUBIC);
 }
 
 void TransicionImagenes::on_buttonBox_accepted()

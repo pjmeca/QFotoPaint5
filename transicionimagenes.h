@@ -25,7 +25,6 @@ private slots:
 private:
     Ui::TransicionImagenes *ui;
     int nfoto1, nfoto2;
-    Mat imgUno, imgDos, imgRes;
     int corresp[MAX_VENTANAS];
 };
 
