@@ -88,6 +88,7 @@ private slots:
     void on_actionSuavizado_temporal_triggered();
     void on_actionTransici_n_entre_im_genes_triggered();
     void on_actionCopiar_con_efectos_triggered();
+    void on_actionConvertir_a_color_falso_triggered();
 };
 
 extern MainWindow *w;

@@ -196,4 +196,7 @@ void nueva_portapapeles();
 void copiar_en_portapapeles(Mat imagen);
 // Copia el ROI de la imagen actual en el portapapeles.
 
+void color_falso(int nfoto, int ncolor, bool guardar=false);
+// Aplica una conversión de escala de grises a una paleta de color falso.
+
 #endif // IMAGENES_H

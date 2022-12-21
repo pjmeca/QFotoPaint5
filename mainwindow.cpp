@@ -29,6 +29,7 @@ using namespace cv;
 #include "suavizadotemporal.h"
 #include "transicionimagenes.h"
 #include "bajorrelievevideo.h"
+#include "colorfalso.h"
 
 QString FiltroImagen = "Todos los formatos (*.jpg *.jpeg *.jpe .jp2 *.tif *.tiff *.png *.gif *.bmp *.dib *.webp *.ppm);;Archivos JPG (*.jpg *.jpeg *.jpe);;Archivos TIF (*.tif *.tiff);;Archivos PNG (*.png);;Archivos GIF (*.gif);;Archivos BMP (*.bmp *.dib);;Otros (*.*)";
 
@@ -566,4 +567,13 @@ void MainWindow::on_actionCopiar_con_efectos_triggered()
 {
     bajorrelieveVideo s;
     s.exec();
+}
+
+void MainWindow::on_actionConvertir_a_color_falso_triggered()
+{
+    int nfoto = foto_activa();
+    if(nfoto != -1){
+        colorFalso c(nfoto);
+        c.exec();
+    }
 }

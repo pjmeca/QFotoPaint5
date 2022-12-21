@@ -967,3 +967,18 @@ void copiar_en_portapapeles(Mat imagen)
 }
 
 //---------------------------------------------------------------------------
+
+void color_falso(int nfoto, int ncolor, bool guardar)
+{
+    Mat gris, res;
+    cvtColor(foto[nfoto].img, gris, COLOR_BGR2GRAY);
+    applyColorMap(gris, res, ncolor);
+
+    imshow(foto[nfoto].nombre, res);
+    if(guardar){
+        res.copyTo(foto[nfoto].img);
+        foto[nfoto].modificada = true;
+    }
+}
+
+//---------------------------------------------------------------------------
