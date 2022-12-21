@@ -500,14 +500,15 @@ p, li { white-space: pre-wrap; }
      <addaction name="actionRotar_91"/>
     </widget>
     <addaction name="actionBrillo_contraste"/>
+    <addaction name="actionAjuste_rojo_verde_azul"/>
     <addaction name="actionMatiz_saturaci_n_luminosidad"/>
     <addaction name="actionInvertir"/>
     <addaction name="menuRotar"/>
     <addaction name="actionMedia_ponderada"/>
     <addaction name="actionAjuste_lineal"/>
     <addaction name="actionEscala_de_color"/>
-    <addaction name="actionPerspectiva"/>
     <addaction name="actionConvertir_a_color_falso"/>
+    <addaction name="actionPerspectiva"/>
    </widget>
    <widget class="QMenu" name="menuEfectos">
     <property name="title">
@@ -829,7 +830,12 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionConvertir_a_color_falso">
    <property name="text">
-    <string>Convertir a color falso...</string>
+    <string>Color falso...</string>
+   </property>
+  </action>
+  <action name="actionAjuste_rojo_verde_azul">
+   <property name="text">
+    <string>Ajuste rojo/verde/azul</string>
    </property>
   </action>
  </widget>

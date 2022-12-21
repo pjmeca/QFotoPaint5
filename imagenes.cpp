@@ -982,3 +982,53 @@ void color_falso(int nfoto, int ncolor, bool guardar)
 }
 
 //---------------------------------------------------------------------------
+
+void ajustar_rojo_verde_azul(int nfoto,int Rop, int Rval, int Gop, int Gval, int Bop, int Bval, bool previsualizar, bool guardar){
+    Mat img= foto[nfoto].img.clone();
+    Mat res;
+    Mat ch1, ch2, ch3;
+    Mat channels[3];
+    split(img, channels);
+    // get the channels (dont forget they follow BGR order in OpenCV)
+    ch1 = channels[0];
+    ch2 = channels[1];
+    ch3 = channels[2];
+
+    //Rojo
+    if(Rop==0){
+        //Sum
+        ch3+=Rval;
+    }else{
+        //Mult
+        ch3*=Rval;
+    }
+
+    //Verde
+    if(Gop==0){
+        //Sum
+        ch2+=Gval;
+    }else{
+        //Mult
+        ch2*=Gval;
+    }
+
+    //Azul
+    if(Bop==0){
+        //Sum
+        ch1+=Bval;
+    }else{
+        //Mult
+        ch1*=Bval;
+    }
+
+    merge(channels, 3, res);
+
+    if(previsualizar)
+        imshow(foto[nfoto].nombre,res);
+    if(guardar){
+        res.copyTo(foto[nfoto].img);
+        foto[nfoto].modificada = true;
+    }
+}
+
+//---------------------------------------------------------------------------

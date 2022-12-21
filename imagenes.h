@@ -199,4 +199,7 @@ void copiar_en_portapapeles(Mat imagen);
 void color_falso(int nfoto, int ncolor, bool guardar=false);
 // Aplica una conversión de escala de grises a una paleta de color falso.
 
+void ajustar_rojo_verde_azul(int nfoto,int Rop, int Rval, int Gop, int Gval, int Bop, int Bval, bool previsualizar=true, bool guardar=false);
+// Modificar (multiplicar/sumar) cada uno de los canales de forma independiente, para poder hacer una transformación de color.
+
 #endif // IMAGENES_H

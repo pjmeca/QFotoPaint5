@@ -30,6 +30,7 @@ using namespace cv;
 #include "transicionimagenes.h"
 #include "bajorrelievevideo.h"
 #include "colorfalso.h"
+#include "ajustecolor.h"
 
 QString FiltroImagen = "Todos los formatos (*.jpg *.jpeg *.jpe .jp2 *.tif *.tiff *.png *.gif *.bmp *.dib *.webp *.ppm);;Archivos JPG (*.jpg *.jpeg *.jpe);;Archivos TIF (*.tif *.tiff);;Archivos PNG (*.png);;Archivos GIF (*.gif);;Archivos BMP (*.bmp *.dib);;Otros (*.*)";
 
@@ -574,6 +575,15 @@ void MainWindow::on_actionConvertir_a_color_falso_triggered()
     int nfoto = foto_activa();
     if(nfoto != -1){
         colorFalso c(nfoto);
+        c.exec();
+    }
+}
+
+void MainWindow::on_actionAjuste_rojo_verde_azul_triggered()
+{
+    int nfoto = foto_activa();
+    if(nfoto != -1) {
+        AjusteColor c(nfoto);
         c.exec();
     }
 }
