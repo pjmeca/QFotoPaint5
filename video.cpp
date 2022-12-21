@@ -255,3 +255,80 @@ void capturar_camara(int nres)
 }
 
 //---------------------------------------------------------------------------
+
+void guardarFrame(VideoWriter writer, Mat frame, String nombre){
+    imshow(nombre, frame);
+    writer << frame;
+    waitKey(1);
+}
+
+void transicion(int nf1, int nf2, String nombre, int framesImagen, int codec, double fps,int trans)
+{
+    assert(nf1>=0 && nf1<MAX_VENTANAS && foto[nf1].usada);
+    assert(nf2>=0 && nf2<MAX_VENTANAS && foto[nf2].usada);
+    Mat frame;
+    Mat img1= foto[nf1].img.clone();
+    Mat img2;
+    resize(foto[nf2].img, img2, img1.size());
+    VideoWriter writer(nombre, codec, fps, img1.size());
+
+    int duracion = 3;
+
+    if(writer.isOpened()){
+
+        frame=img1.clone();
+        for(int i=0;i<framesImagen;i++){
+            guardarFrame(writer, frame, nombre);
+        }
+
+        switch(trans) {
+        case 0 ://Media ponderada
+        {
+            int salto = 1000/(fps*duracion);
+            if (salto == 0)
+                salto = 1;
+            for(int i =1;i<1000;i+=salto){
+                frame=img2.clone();
+                addWeighted(img1, (1000-i)/1000.0, frame, i/1000.0, 0, frame);
+                guardarFrame(writer, frame, nombre);
+            }
+            break;
+        }
+        case 1 : //Barrido columnas
+        {
+            int salto = img1.cols/(fps*duracion);
+            if (salto == 0)
+                salto = 1;
+            for(int i=0;i<img1.cols;i++){
+                img2.col(i).copyTo(frame.col(i));
+                if(i%salto == 0)
+                    guardarFrame(writer, frame, nombre);
+            }
+            break;
+        }
+        case 2 : //Barrido filas
+        {
+            int salto = img1.rows/(fps*duracion);
+            if (salto == 0)
+                salto = 1;
+            for(int i=0;i<img1.rows;i++){
+                img2.row(i).copyTo(frame.row(i));
+                if(i%salto == 0)
+                    guardarFrame(writer, frame, nombre);
+            }
+            break;
+        }
+        }
+
+        frame=img2.clone();
+        for(int i=0;i<framesImagen;i++){
+            guardarFrame(writer, frame, nombre);
+        }
+
+        destroyWindow(nombre);
+
+        writer.release();
+    }
+}
+
+//---------------------------------------------------------------------------

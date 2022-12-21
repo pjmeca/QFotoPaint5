@@ -534,6 +534,7 @@ p, li { white-space: pre-wrap; }
       <string>Imagen a vídeo</string>
      </property>
      <addaction name="actionRotar_imagen"/>
+     <addaction name="actionTransici_n_entre_im_genes"/>
     </widget>
     <widget class="QMenu" name="menuV_deo_a_imagen">
      <property name="title">
@@ -812,6 +813,11 @@ p, li { white-space: pre-wrap; }
   <action name="actionSuavizado_temporal">
    <property name="text">
     <string>Suavizado temporal...</string>
+   </property>
+  </action>
+  <action name="actionTransici_n_entre_im_genes">
+   <property name="text">
+    <string>Transición entre imágenes...</string>
    </property>
   </action>
  </widget>

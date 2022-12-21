@@ -31,6 +31,7 @@ SOURCES += main.cpp\
     pincharestirar.cpp \
     suavizados.cpp \
     suavizadotemporal.cpp \
+    transicionimagenes.cpp \
     video.cpp \
     rotaravideo.cpp \
     mediaponderada.cpp \
@@ -53,6 +54,7 @@ HEADERS  += mainwindow.h \
     pincharestirar.h \
     suavizados.h \
     suavizadotemporal.h \
+    transicionimagenes.h \
     video.h \
     rotaravideo.h \
     mediaponderada.h \
@@ -77,7 +79,8 @@ FORMS    += mainwindow.ui \
     mediaponderada.ui \
     acercade.ui \
     mediadevideo.ui \
-    suavizadotemporal.ui
+    suavizadotemporal.ui \
+    transicionimagenes.ui
 
 INCLUDEPATH += "C:\OpenCV\OpenCV4.6.0G\include"
 

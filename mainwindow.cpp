@@ -27,6 +27,7 @@ using namespace cv;
 #include "informacion.h"
 #include "minmaxvideo.h"
 #include "suavizadotemporal.h"
+#include "transicionimagenes.h"
 
 QString FiltroImagen = "Todos los formatos (*.jpg *.jpeg *.jpe .jp2 *.tif *.tiff *.png *.gif *.bmp *.dib *.webp *.ppm);;Archivos JPG (*.jpg *.jpeg *.jpe);;Archivos TIF (*.tif *.tiff);;Archivos PNG (*.png);;Archivos GIF (*.gif);;Archivos BMP (*.bmp *.dib);;Otros (*.*)";
 
@@ -550,4 +551,10 @@ void MainWindow::on_actionSuavizado_temporal_triggered()
         suavizadoTemporal s(nombreVideo);
         s.exec();
     }
+}
+
+void MainWindow::on_actionTransici_n_entre_im_genes_triggered()
+{
+    TransicionImagenes t;
+    t.exec();
 }

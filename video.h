@@ -46,4 +46,7 @@ void mostrar_camara (void);
 void capturar_camara(int nres);
 // Captura de cámara y almacena en la posición nres
 
+void transicion(int nf1, int nf2, String nombre, int framesImagen, int codec, double fps,int trans);
+// Transición entre dos imágenes y guarda en un vídeo
+
 #endif // VIDEO_H
