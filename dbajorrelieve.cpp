@@ -8,11 +8,11 @@ Dbajorrelieve::Dbajorrelieve(int numfoto, QWidget *parent) :
     ui(new Ui::Dbajorrelieve)
 {
     ui->setupUi(this);
-       nfoto = numfoto;
-       angulo = 0;
-       grado = 1.0;
-       fondo = 0;
-       ver_bajorrelieve(nfoto, angulo, grado, fondo);
+   nfoto = numfoto;
+   angulo = 0;
+   grado = 1.0;
+   fondo = 0;
+   ver_bajorrelieve(nfoto, angulo, grado, fondo);
 }
 
 Dbajorrelieve::~Dbajorrelieve()

@@ -549,6 +549,7 @@ p, li { white-space: pre-wrap; }
       <string>Vídeo a video</string>
      </property>
      <addaction name="actionSuavizado_temporal"/>
+     <addaction name="actionCopiar_con_efectos"/>
     </widget>
     <addaction name="menuImagen_a_v_deo"/>
     <addaction name="menuV_deo_a_imagen"/>
@@ -818,6 +819,11 @@ p, li { white-space: pre-wrap; }
   <action name="actionTransici_n_entre_im_genes">
    <property name="text">
     <string>Transición entre imágenes...</string>
+   </property>
+  </action>
+  <action name="actionCopiar_con_efectos">
+   <property name="text">
+    <string>Copiar con efectos...</string>
    </property>
   </action>
  </widget>
