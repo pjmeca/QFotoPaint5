@@ -943,16 +943,19 @@ void ver_histograma(int nfoto, int nres, int canal)
 
 //---------------------------------------------------------------------------
 
-void nueva_portapapeles()
+bool nueva_portapapeles(int pl)
 {
     QClipboard* clip = QApplication::clipboard();
     QImage imagen = clip->image(QClipboard::Clipboard);
-    Mat mat = Mat(imagen.height(), imagen.width(), CV_8UC4, imagen.scanLine(0));
 
-    int pl= primera_libre();
-    if (pl != -1) {
-        crear_nueva(pl, mat.clone());
-    }
+    if(imagen.isNull())
+        return false;
+
+    Mat mat = Mat(imagen.height(), imagen.width(), CV_8UC3, imagen.scanLine(0));
+    cvtColor(mat, mat, COLOR_RGB2BGR);
+    crear_nueva(pl, mat.clone());
+
+    return true;
 }
 
 //---------------------------------------------------------------------------
@@ -961,7 +964,10 @@ void copiar_en_portapapeles(Mat imagen)
 {
     QClipboard* clip = QApplication::clipboard();
 
-    QImage img((unsigned char*) imagen.data, imagen.cols, imagen.rows, imagen.step, QImage::Format_RGBA8888);
+    Mat imagen_aux;
+    cvtColor(imagen, imagen_aux, COLOR_BGR2RGB);
+
+    QImage img = QImage(static_cast<uchar*>(imagen_aux.data), imagen_aux.cols, imagen_aux.rows, imagen_aux.step, QImage::Format_RGB888).copy();
 
     clip->setImage(img, QClipboard::Clipboard);
 }

@@ -190,7 +190,7 @@ void ver_histograma(int nfoto, int nres, int canal);
 // Calcular el histograma de nfoto en el canal dado
 // y mostrar en nres
 
-void nueva_portapapeles();
+bool nueva_portapapeles(int pl);
 // Crea una nueva imagen a partir de la última copiada en el portapapeles.
 
 void copiar_en_portapapeles(Mat imagen);

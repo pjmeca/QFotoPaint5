@@ -502,7 +502,11 @@ void MainWindow::on_actionCapturar_de_v_deo_triggered()
 
 void MainWindow::on_actionNueva_desde_portapapeles_triggered()
 {
-    nueva_portapapeles();
+    int pl= primera_libre();
+    if (pl != -1)
+        if(!nueva_portapapeles(pl))
+            QMessageBox::warning(this, "Error al crear imagen",
+                                 "No se ha encontrado ninguna imagen en el portapapeles.");
 }
 
 void MainWindow::on_actionCopiar_al_portapapeles_triggered()
