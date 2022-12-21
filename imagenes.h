@@ -202,4 +202,7 @@ void color_falso(int nfoto, int ncolor, bool guardar=false);
 void ajustar_rojo_verde_azul(int nfoto,int Rop, int Rval, int Gop, int Gval, int Bop, int Bval, bool previsualizar=true, bool guardar=false);
 // Modificar (multiplicar/sumar) cada uno de los canales de forma independiente, para poder hacer una transformación de color.
 
+void modelos_de_color(int nfoto,int pos, bool guardar=false);
+// Aplicar transformaciones del modelo de color de la imagen, entre RGB, HLS, HSV, XYZ, YUV, etc.
+
 #endif // IMAGENES_H

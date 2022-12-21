@@ -509,6 +509,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionEscala_de_color"/>
     <addaction name="actionConvertir_a_color_falso"/>
     <addaction name="actionPerspectiva"/>
+    <addaction name="actionCambiar_modelo_de_color"/>
    </widget>
    <widget class="QMenu" name="menuEfectos">
     <property name="title">
@@ -836,6 +837,11 @@ p, li { white-space: pre-wrap; }
   <action name="actionAjuste_rojo_verde_azul">
    <property name="text">
     <string>Ajuste rojo/verde/azul</string>
+   </property>
+  </action>
+  <action name="actionCambiar_modelo_de_color">
+   <property name="text">
+    <string>Cambiar modelo de color...</string>
    </property>
   </action>
  </widget>

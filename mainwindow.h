@@ -90,6 +90,7 @@ private slots:
     void on_actionCopiar_con_efectos_triggered();
     void on_actionConvertir_a_color_falso_triggered();
     void on_actionAjuste_rojo_verde_azul_triggered();
+    void on_actionCambiar_modelo_de_color_triggered();
 };
 
 extern MainWindow *w;

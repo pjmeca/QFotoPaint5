@@ -1032,3 +1032,41 @@ void ajustar_rojo_verde_azul(int nfoto,int Rop, int Rval, int Gop, int Gval, int
 }
 
 //---------------------------------------------------------------------------
+
+void modelos_de_color(int nfoto,int pos, bool guardar){
+    Mat img = foto[nfoto].img;
+    Mat res;
+    switch (pos) {
+    case 0:
+        cvtColor(img,res,COLOR_BGR2RGB);//4
+        break;
+    case 1:
+        cvtColor(img,res,COLOR_BGR2HLS);//52
+        break;
+    case 2:
+        cvtColor(img,res,COLOR_BGR2HSV);//40
+        break;
+    case 3:
+        cvtColor(img,res,COLOR_BGR2XYZ);//32
+        break;
+    case 4:
+        cvtColor(img,res,COLOR_BGR2YUV);//82
+        break;
+    case 5:
+        cvtColor(img,res,COLOR_BGR2Lab);//44
+        break;
+    case 6:
+        cvtColor(img,res,COLOR_BGR2Luv);//50
+        break;
+    case 7:
+        cvtColor(img,res,COLOR_BGR2GRAY);//6
+        break;
+    }
+    imshow(foto[nfoto].nombre, res);
+    if (guardar) {
+            res.copyTo(foto[nfoto].img);
+            foto[nfoto].modificada= true;
+    }
+}
+
+//---------------------------------------------------------------------------
