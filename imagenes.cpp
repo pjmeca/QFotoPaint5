@@ -947,11 +947,13 @@ bool nueva_portapapeles(int pl)
 {
     QClipboard* clip = QApplication::clipboard();
     QImage imagen = clip->image(QClipboard::Clipboard);
+    imagen = imagen.convertToFormat(QImage::Format_RGB888);
 
     if(imagen.isNull())
         return false;
 
-    Mat mat = Mat(imagen.height(), imagen.width(), CV_8UC3, imagen.scanLine(0));
+    Mat mat = Mat(imagen.height(), imagen.width(), CV_8UC3, const_cast<uchar*>(imagen.bits()),
+                  imagen.bytesPerLine()).clone();
     cvtColor(mat, mat, COLOR_RGB2BGR);
     crear_nueva(pl, mat.clone());
 
