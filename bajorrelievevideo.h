@@ -17,6 +17,7 @@ public:
 
 private slots:
     void on_bajorrelieveVideo_accepted();
+    void reabrirDialogo();
 
 private:
     Ui::bajorrelieveVideo *ui;
