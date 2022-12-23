@@ -364,6 +364,26 @@ double getFpsCamara(VideoCapture video)
     return num_frames / seconds;
 }
 
+// Función auxiliar para aplicar el efecto de bajorrelieve
+Mat aplicar_bajorrelieve(Mat frame, Mat imgfondo, double angulo, double grado)
+{
+    Mat gris;
+    cvtColor(frame, gris, COLOR_BGR2GRAY);
+    Mat rotada;
+    rotar_angulo(gris, rotada, angulo, 1.0, 1);
+    Mat sobel;
+    Sobel(rotada, sobel, CV_8U, 1, 0, 3, grado, 128, BORDER_REFLECT);
+    rotar_angulo(sobel, rotada, -angulo, 1.0, 0);
+    Mat res;
+    res= rotada(Rect((rotada.cols-gris.cols)/2,
+                     (rotada.rows-gris.rows)/2,
+                     gris.cols, gris.rows));
+    cvtColor(res, res, COLOR_GRAY2BGR); // lo devolvemos a 3 canales
+    addWeighted(res, 1.0, imgfondo, 1.0, -128, res); // le sumamos el fondo
+
+    return res;
+}
+
 void bajorrelieve_video (String videoOriginal, String videoSalida, double angulo, double grado, int nfondo)
 {
     QString nombres[4]={":/imagenes/arena.jpg",
@@ -389,37 +409,13 @@ void bajorrelieve_video (String videoOriginal, String videoSalida, double angulo
             VideoWriter writer(videoSalida, cap.get(CAP_PROP_FOURCC), videoOriginal.empty() ? fps_camara : cap.get(CAP_PROP_FPS), frame.size());
             resize(imgfondo, imgfondo, frame.size());
 
-            Mat gris;
-            cvtColor(frame, gris, COLOR_BGR2GRAY);
-            Mat rotada;
-            rotar_angulo(gris, rotada, angulo, 1.0, 1);
-            Mat sobel;
-            Sobel(rotada, sobel, CV_8U, 1, 0, 3, grado, 128, BORDER_REFLECT);
-            rotar_angulo(sobel, rotada, -angulo, 1.0, 0);
-            Mat res;
-            res= rotada(Rect((rotada.cols-gris.cols)/2,
-                             (rotada.rows-gris.rows)/2,
-                             gris.cols, gris.rows));
-            cvtColor(res, res, COLOR_GRAY2BGR); // lo devolvemos a 3 canales
-            addWeighted(res, 1.0, imgfondo, 1.0, -128, res); // le sumamos el fondo
+            Mat res = aplicar_bajorrelieve(frame, imgfondo, angulo, grado);
 
             imshow(videoSalida, res);
             writer << res;
 
             while(cap.read(frame) && !frame.empty() && waitKey(1) == -1) {
-                Mat gris;
-                cvtColor(frame, gris, COLOR_BGR2GRAY);
-                Mat rotada;
-                rotar_angulo(gris, rotada, angulo, 1.0, 1);
-                Mat sobel;
-                Sobel(rotada, sobel, CV_8U, 1, 0, 3, grado, 128, BORDER_REFLECT);
-                rotar_angulo(sobel, rotada, -angulo, 1.0, 0);
-                Mat res;
-                res= rotada(Rect((rotada.cols-gris.cols)/2,
-                                 (rotada.rows-gris.rows)/2,
-                                 gris.cols, gris.rows));
-                cvtColor(res, res, COLOR_GRAY2BGR); // lo devolvemos a 3 canales
-                addWeighted(res, 1.0, imgfondo, 1.0, -128, res); // le sumamos el fondo
+                res = aplicar_bajorrelieve(frame, imgfondo, angulo, grado);
 
                 imshow(videoSalida, res);
                 writer << res;
