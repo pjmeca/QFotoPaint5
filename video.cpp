@@ -334,6 +334,36 @@ void transicion(int nf1, int nf2, String nombre, int framesImagen, int codec, do
 
 //---------------------------------------------------------------------------
 
+// CAP_PROP_FPS no funciona con cámaras, así que debemos calcular los fps manualmente
+// implementación basada en: https://learnopencv.com/how-to-find-frame-rate-or-frames-per-second-fps-in-opencv-python-cpp/
+double getFpsCamara(VideoCapture video)
+{
+    // Number of frames to capture
+    int num_frames = 60;
+
+    // Start and end times
+    time_t start, end;
+
+    // Variable for storing video frames
+    Mat frame;
+
+    // Start time
+    time(&start);
+
+    // Grab a few frames
+    for(int i = 0; i < num_frames; i++)
+        video >> frame;
+
+    // End Time
+    time(&end);
+
+    // Time elapsed
+    double seconds = difftime (end, start);
+
+    // Calculate frames per second
+    return num_frames / seconds;
+}
+
 void bajorrelieve_video (String videoOriginal, String videoSalida, double angulo, double grado, int nfondo)
 {
     QString nombres[4]={":/imagenes/arena.jpg",
@@ -344,18 +374,19 @@ void bajorrelieve_video (String videoOriginal, String videoSalida, double angulo
     Mat imgfondo(imq.height(),imq.width(),CV_8UC4,imq.scanLine(0));
     cvtColor(imgfondo, imgfondo, COLOR_RGBA2RGB);
 
-    VideoCapture cap;
-    if(videoOriginal.empty())
-        cap = VideoCapture(0);
-    else
-        cap = VideoCapture(videoOriginal);
+    VideoCapture cap; double fps_camara = 0;
+    if(videoOriginal.empty()) {
+        cap = VideoCapture(0); // cámara
+        fps_camara = getFpsCamara(cap);
+    } else
+        cap = VideoCapture(videoOriginal); // vídeo
 
     if (cap.isOpened()) {
         if(!videoOriginal.empty())
             cap.set(CAP_PROP_POS_FRAMES, 1);
         Mat frame;
         if (cap.read(frame)) {
-            VideoWriter writer(videoSalida, cap.get(CAP_PROP_FOURCC), videoOriginal.empty() ? 30 : cap.get(CAP_PROP_FPS), frame.size());
+            VideoWriter writer(videoSalida, cap.get(CAP_PROP_FOURCC), videoOriginal.empty() ? fps_camara : cap.get(CAP_PROP_FPS), frame.size());
             resize(imgfondo, imgfondo, frame.size());
 
             Mat gris;
