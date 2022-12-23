@@ -50,7 +50,6 @@ void transicion(int nf1, int nf2, String nombre, int framesImagen, int codec, do
 // Transición entre dos imágenes y guarda en un vídeo
 
 void bajorrelieve_video(String videoOriginal, String videoSalida, double angulo, double grado, int nfondo);
-void bajorrelieve_camara(String videoSalida, double angulo, double grado, int nfondo);
 // Aplicar el efecto bajorrelieve a los fotogramas de un vídeo
 
 #endif // VIDEO_H

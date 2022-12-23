@@ -66,5 +66,5 @@ void bajorrelieveVideo::on_bajorrelieveVideo_accepted()
     if(ui->radioButton_video->isChecked())
         bajorrelieve_video(videoOriginal.toLatin1().data(), nombre.toLatin1().data(), angulo, grado, fondo);
     else
-        bajorrelieve_camara(nombre.toLatin1().data(), angulo, grado, fondo);
+        bajorrelieve_video("", nombre.toLatin1().data(), angulo, grado, fondo);
 }

@@ -344,72 +344,18 @@ void bajorrelieve_video (String videoOriginal, String videoSalida, double angulo
     Mat imgfondo(imq.height(),imq.width(),CV_8UC4,imq.scanLine(0));
     cvtColor(imgfondo, imgfondo, COLOR_RGBA2RGB);
 
-    VideoCapture cap(videoOriginal);
+    VideoCapture cap;
+    if(videoOriginal.empty())
+        cap = VideoCapture(0);
+    else
+        cap = VideoCapture(videoOriginal);
+
     if (cap.isOpened()) {
-        cap.set(CAP_PROP_POS_FRAMES, 1);
+        if(!videoOriginal.empty())
+            cap.set(CAP_PROP_POS_FRAMES, 1);
         Mat frame;
         if (cap.read(frame)) {
-            VideoWriter writer(videoSalida, cap.get(CAP_PROP_FOURCC), cap.get(CAP_PROP_FPS), frame.size());
-            resize(imgfondo, imgfondo, frame.size());
-
-            Mat gris;
-            cvtColor(frame, gris, COLOR_BGR2GRAY);
-            Mat rotada;
-            rotar_angulo(gris, rotada, angulo, 1.0, 1);
-            Mat sobel;
-            Sobel(rotada, sobel, CV_8U, 1, 0, 3, grado, 128, BORDER_REFLECT);
-            rotar_angulo(sobel, rotada, -angulo, 1.0, 0);
-            Mat res;
-            res= rotada(Rect((rotada.cols-gris.cols)/2,
-                             (rotada.rows-gris.rows)/2,
-                             gris.cols, gris.rows));
-            cvtColor(res, res, COLOR_GRAY2BGR); // lo devolvemos a 3 canales
-            addWeighted(res, 1.0, imgfondo, 1.0, -128, res); // le sumamos el fondo
-
-            imshow(videoSalida, res);
-            writer << res;
-
-            while(cap.read(frame) && !frame.empty() && waitKey(1) == -1) {
-                Mat gris;
-                cvtColor(frame, gris, COLOR_BGR2GRAY);
-                Mat rotada;
-                rotar_angulo(gris, rotada, angulo, 1.0, 1);
-                Mat sobel;
-                Sobel(rotada, sobel, CV_8U, 1, 0, 3, grado, 128, BORDER_REFLECT);
-                rotar_angulo(sobel, rotada, -angulo, 1.0, 0);
-                Mat res;
-                res= rotada(Rect((rotada.cols-gris.cols)/2,
-                                 (rotada.rows-gris.rows)/2,
-                                 gris.cols, gris.rows));
-                cvtColor(res, res, COLOR_GRAY2BGR); // lo devolvemos a 3 canales
-                addWeighted(res, 1.0, imgfondo, 1.0, -128, res); // le sumamos el fondo
-
-                imshow(videoSalida, res);
-                writer << res;
-            }
-
-            writer.release();
-        }
-    } else {
-        printf("No se pudo abrir el vídeo de origen.\n");
-    }
-}
-
-void bajorrelieve_camara (String videoSalida, double angulo, double grado, int nfondo)
-{
-    QString nombres[4]={":/imagenes/arena.jpg",
-                       ":/imagenes/cielo.jpg",
-                       ":/imagenes/gris.png",
-                       ":/imagenes/madera.jpg"};
-    QImage imq= QImage(nombres[nfondo]);
-    Mat imgfondo(imq.height(),imq.width(),CV_8UC4,imq.scanLine(0));
-    cvtColor(imgfondo, imgfondo, COLOR_RGBA2RGB);
-
-    VideoCapture cap(0);
-    if (cap.isOpened()) {
-        Mat frame;
-        if (cap.read(frame)) {
-            VideoWriter writer(videoSalida, cap.get(CAP_PROP_FOURCC), 30, frame.size());
+            VideoWriter writer(videoSalida, cap.get(CAP_PROP_FOURCC), videoOriginal.empty() ? 30 : cap.get(CAP_PROP_FPS), frame.size());
             resize(imgfondo, imgfondo, frame.size());
 
             Mat gris;
