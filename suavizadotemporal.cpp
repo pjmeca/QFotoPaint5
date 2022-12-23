@@ -34,7 +34,7 @@ void suavizadoTemporal::on_suavizadoTemporal_accepted()
 {
     QString nombreVideoSalida= QFileDialog::getSaveFileName(w, "Guardar vídeo", ".", QString::fromLatin1(FiltroVideo.c_str()));
     if(!nombreVideoOriginal.isEmpty() && !nombreVideoSalida.isEmpty())
-    suavizadoTemporalVideo(nombreVideoOriginal.toLatin1().data(), nombreVideoSalida.toLatin1().data(), n);
+        suavizadoTemporalVideo(nombreVideoOriginal.toLatin1().data(), nombreVideoSalida.toLatin1().data(), n);
 }
 
 void suavizadoTemporal::on_suavizadoTemporal_rejected()
