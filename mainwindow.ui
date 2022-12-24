@@ -437,6 +437,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionNueva_imagen"/>
     <addaction name="actionAbrir_imagen"/>
     <addaction name="actionNueva_desde_portapapeles"/>
+    <addaction name="separator"/>
     <addaction name="actionCapturar_de_c_mara"/>
     <addaction name="actionCapturar_de_v_deo"/>
     <addaction name="separator"/>
@@ -483,8 +484,10 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionArco_ris"/>
     <addaction name="actionLinea"/>
     <addaction name="actionTrazo"/>
+    <addaction name="separator"/>
     <addaction name="actionRect_ngulo"/>
     <addaction name="actionElipse"/>
+    <addaction name="separator"/>
     <addaction name="actionSeleccionar"/>
    </widget>
    <widget class="QMenu" name="menuTransformar">
@@ -502,14 +505,16 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionBrillo_contraste"/>
     <addaction name="actionAjuste_rojo_verde_azul"/>
     <addaction name="actionMatiz_saturaci_n_luminosidad"/>
-    <addaction name="actionInvertir"/>
-    <addaction name="menuRotar"/>
-    <addaction name="actionMedia_ponderada"/>
     <addaction name="actionAjuste_lineal"/>
+    <addaction name="separator"/>
+    <addaction name="menuRotar"/>
+    <addaction name="actionPerspectiva"/>
+    <addaction name="separator"/>
     <addaction name="actionEscala_de_color"/>
     <addaction name="actionConvertir_a_color_falso"/>
-    <addaction name="actionPerspectiva"/>
+    <addaction name="actionMedia_ponderada"/>
     <addaction name="actionCambiar_modelo_de_color"/>
+    <addaction name="actionInvertir"/>
    </widget>
    <widget class="QMenu" name="menuEfectos">
     <property name="title">
@@ -551,8 +556,8 @@ p, li { white-space: pre-wrap; }
      <property name="title">
       <string>Vídeo a video</string>
      </property>
-     <addaction name="actionSuavizado_temporal"/>
      <addaction name="actionCopiar_con_efectos"/>
+     <addaction name="actionSuavizado_temporal"/>
     </widget>
     <addaction name="menuImagen_a_v_deo"/>
     <addaction name="menuV_deo_a_imagen"/>
