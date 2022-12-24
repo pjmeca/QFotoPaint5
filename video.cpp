@@ -194,9 +194,9 @@ void suavizadoTemporalVideo(string nombreVideoOriginal, string nombreVideoSalida
                ntotal++;
                framei++;
                while (cap.read(frame) && waitKey(1)==-1) {
-                   Mat media=frame.clone()/(n+1);
+                   Mat media=frame.clone()/(ntotal+1);
                    for(int i=0;i<ntotal;i++){
-                       media+=nAnteriores[i]/(n+1);
+                       media+=nAnteriores[i]/(ntotal+1);
                    }
                    media.convertTo(media,CV_8U);
                    imshow("Suavizado media", media);
