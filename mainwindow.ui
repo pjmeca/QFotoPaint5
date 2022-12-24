@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>QFotoPaint4</string>
+   <string>QFotoPaint5</string>
   </property>
   <property name="windowIcon">
    <iconset resource="recursos.qrc">
