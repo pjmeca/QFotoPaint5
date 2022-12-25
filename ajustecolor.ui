@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Ajuste Rojo/Verde/Azul</string>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
@@ -307,19 +307,6 @@ color: rgb(255, 255, 255);</string>
     <string notr="true">buttonGroup_2</string>
    </attribute>
   </widget>
-  <widget class="QRadioButton" name="radioButton_5">
-   <property name="geometry">
-    <rect>
-     <x>440</x>
-     <y>110</y>
-     <width>82</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Multiplicar</string>
-   </property>
-  </widget>
   <widget class="QRadioButton" name="radioButton_6">
    <property name="geometry">
     <rect>
@@ -334,6 +321,19 @@ color: rgb(255, 255, 255);</string>
    </property>
    <property name="checked">
     <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="radioButton_5">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>110</y>
+     <width>82</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Multiplicar</string>
    </property>
   </widget>
  </widget>
