@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Mínima y Máxima</string>
   </property>
   <widget class="QSlider" name="horizontalSlider">
    <property name="geometry">
